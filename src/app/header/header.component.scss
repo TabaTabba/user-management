@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul > li {
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+}
