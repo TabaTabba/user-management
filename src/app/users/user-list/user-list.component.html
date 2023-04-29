@@ -1,1 +1,28 @@
-<p>user-list works!</p>
+<div class="container">
+    <div class="table">
+        <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Email</th>
+                    <th>Personal ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date of Birth</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user *ngFor="let user of users">
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.personalId }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.dateOfBirth }}</td>
+                    <td>{{ user.category }}</td>
+                    <td>{{ user.status }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

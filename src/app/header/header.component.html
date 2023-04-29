@@ -1,10 +1,27 @@
 <div class="container">
-    <h3><a routerLink="/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User<br>Management</a></h3>
+    <h3>
+      <a routerLink="/">
+        <span class="menu-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User<br>Management</span>
+      </a>
+    </h3>
     <div class="navbar">
-        <ul>
-            <li routerLink="/users">Users</li>
-            <li routerLink="/categories">Categories</li>
-            <li routerLink="/statuses">Statuses</li>
-        </ul>
+      <ul class="menu">
+        <li class="menu-item" routerLink="/users">
+          <a>
+            <span class="menu-label">Users</span>
+          </a>
+        </li>
+        <li class="menu-item" routerLink="/categories">
+          <a>
+            <span class="menu-label">Categories</span>
+          </a>
+        </li>
+        <li class="menu-item" routerLink="/statuses">
+          <a>
+            <span class="menu-label">Statuses</span>
+          </a>
+        </li>
+      </ul>
     </div>
-</div>
+  </div>
+  
