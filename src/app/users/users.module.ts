@@ -5,16 +5,18 @@ import { UsersComponent } from "./users.component";
 import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
- declarations: [
-    UsersComponent,
-    UserFilterComponent,
-    UserListComponent
- ],
- imports: [SharedModule],
- exports: [
-    UsersComponent,
-    UserFilterComponent,
-    UserListComponent
- ]
+   declarations: [
+      UsersComponent,
+      UserFilterComponent,
+      UserListComponent
+   ],
+   imports: [
+      SharedModule
+   ],
+   exports: [
+      UsersComponent,
+      UserFilterComponent,
+      UserListComponent
+   ]
 })
-export class UsersModule{}
+export class UsersModule { }

@@ -1,11 +1,13 @@
 import { NgModule } from "@angular/core";
-import { TableModule } from 'primeng/table';
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
  declarations: [],
  imports: [],
  exports: [
-    TableModule
+   MatTableModule,
+   MatPaginatorModule
  ]
 })
 export class SharedModule{} 
