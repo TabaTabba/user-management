@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="userFilterForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="userCreateForm" (ngSubmit)="onSubmit()">
         <div class="form-wrapper">
             <div class="input">
                 <mat-form-field class="example-full-width">
@@ -51,9 +51,9 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="button-wrapper">
-                <button class="button search" type="submit" mat-flat-button color="primary">Search</button>
-                <button class="button clear" mat-flat-button color="warn" (click)="onClear()">Clear</button>
+            <div class="btn-wrapper">
+                <button mat-flat-button color="warn" routerLink="/users" class="btn cancel">Cancel</button>
+                <button mat-flat-button routerLink="/users" class="btn add">Add</button>
             </div>
         </div>
     </form>

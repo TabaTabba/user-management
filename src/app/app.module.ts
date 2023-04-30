@@ -8,6 +8,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { StatusesModule } from './statuses/statuses.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserDetailsModule } from './user-details/user-details.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     UsersModule,
+    UserDetailsModule,
     CategoriesModule,
     StatusesModule,
     SharedModule,

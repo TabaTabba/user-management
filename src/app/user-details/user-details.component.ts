@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-user-filter',
-  templateUrl: './user-filter.component.html',
-  styleUrls: ['./user-filter.component.scss']
+  selector: 'app-user-details',
+  templateUrl: './user-details.component.html',
+  styleUrls: ['./user-details.component.scss']
 })
-export class UserFilterComponent implements OnInit {
-  userFilterForm: FormGroup | any;
-
+export class UserDetailsComponent implements OnInit{
   categories: Category[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
+    { value: 'tacos-2', viewValue: 'Tacos' }
   ];
 
+  userCreateForm: FormGroup | any;
+  
   ngOnInit(): void {
     this.initForm();
   }
@@ -28,7 +28,7 @@ export class UserFilterComponent implements OnInit {
     let category = '';
     let status = '';
 
-    this.userFilterForm = new FormGroup({
+    this.userCreateForm = new FormGroup({
       'email': new FormControl(email),
       'personalId': new FormControl(personalId),
       'firstName': new FormControl(firstName),
@@ -39,12 +39,8 @@ export class UserFilterComponent implements OnInit {
     })
   }
 
-  onClear() {
-    this.userFilterForm.reset();
-  }
-
-  onSubmit() {
-  }
+  onSubmit(){}
+  
 }
 
 interface Category {

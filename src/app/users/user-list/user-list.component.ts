@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { User } from '../user.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -21,11 +21,16 @@ export class UserListComponent{
 
   displayedColumns: string[] = ['email', 'personalId', 'firstName', 'lastName', 'dateOfBirth', 'category', 'status'];
   dataSource = new MatTableDataSource<User>(this.users);
-  
+
+  constructor() {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  onAddUser(){
+
   }
 }

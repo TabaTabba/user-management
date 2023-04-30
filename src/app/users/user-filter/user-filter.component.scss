@@ -1,0 +1,25 @@
+.container{
+    padding: 0px 10px;
+
+    .form-wrapper{
+        display: flex;
+        justify-content: space-between;
+
+        .button-wrapper {
+            display: flex;
+            width: 200px;
+            min-width: 150px;
+            margin-top: 10px;
+
+            .search{
+                background-color: #24a0ed;
+            }
+    
+            button:not(:first-child) {
+                margin-left: 15px;
+            }
+        }
+    }
+
+   
+}
