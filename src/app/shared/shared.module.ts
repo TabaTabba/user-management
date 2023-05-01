@@ -7,6 +7,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "../app-routing.module";
+import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { AppRoutingModule } from "../app-routing.module";
    ReactiveFormsModule,
    MatSelectModule,
    BrowserAnimationsModule,
-   AppRoutingModule
+   AppRoutingModule,
+   HttpClientModule,
+   MatIconModule
  ]
 })
 export class SharedModule{} 

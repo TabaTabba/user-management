@@ -1,38 +1,38 @@
 <div class="container">
-    <form [formGroup]="userCreateForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="userCreateForm" [formGroup]="userCreateForm" >
         <div class="form-wrapper">
             <div class="input">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width field">
                     <mat-label>Email</mat-label>
                     <input matInput formControlName="email">
                 </mat-form-field>
             </div>
             <div class="input">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width field">
                     <mat-label>Personal ID</mat-label>
-                    <input matInput formControlName="personalId">
+                    <input matInput formControlName="personalId" (keypress)="onKeyPress($event)" (keydown)="onKeyDown($event, 11)">
                 </mat-form-field>
             </div>
             <div class="input">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width field">
                     <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstName">
+                    <input matInput formControlName="firstName" (keydown)="onKeyDown($event, 20)">
                 </mat-form-field>
             </div>
             <div class="input">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width field">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastName">
+                    <input matInput formControlName="lastName" (keydown)="onKeyDown($event, 20)">
                 </mat-form-field>
             </div>
             <div class="input">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width field">
                     <mat-label>Date of Birth</mat-label>
                     <input matInput formControlName="dateOfBirth">
                 </mat-form-field>
             </div>
-            <div class="input dropdown category">
-                <mat-form-field appearance="fill">
+            <div class="input">
+                <mat-form-field appearance="fill" class="field">
                     <mat-label>Category</mat-label>
                     <mat-select formControlName="category">
                         <mat-option *ngFor="let category of categories" [value]="category.value">
@@ -41,8 +41,8 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="input dropdown status">
-                <mat-form-field appearance="fill">
+            <div class="input">
+                <mat-form-field appearance="fill" class="field">
                     <mat-label>Status</mat-label>
                     <mat-select formControlName="status">
                         <mat-option *ngFor="let category of categories" [value]="category.value">
@@ -53,7 +53,7 @@
             </div>
             <div class="btn-wrapper">
                 <button mat-flat-button color="warn" routerLink="/users" class="btn cancel">Cancel</button>
-                <button mat-flat-button routerLink="/users" class="btn add">Add</button>
+                <button mat-flat-button class="btn add"  (click)="onSubmit()">{{ buttonText }}</button>
             </div>
         </div>
     </form>

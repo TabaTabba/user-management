@@ -1,6 +1,12 @@
 .container {
     .form-wrapper {
+        .input{
+            width: 500px;
 
+            .field{
+                width: 100%;
+            }
+        }
         .btn-wrapper {
             .btn{
                 margin-left: 15px;

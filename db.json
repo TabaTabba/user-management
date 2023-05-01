@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "email": "ads",
+      "personalId": "12345642312",
+      "firstName": "Sabaa",
+      "lastName": "ads",
+      "dateOfBirth": "sad",
+      "category": "steak-0",
+      "status": "pizza-1",
+      "id": 3
+    },
+    {
+      "email": "sd",
+      "personalId": "21424112412",
+      "firstName": "sada",
+      "lastName": "dsa",
+      "dateOfBirth": "dsa",
+      "category": "steak-0",
+      "status": "steak-0",
+      "id": 4
+    },
+    {
+      "email": "s.sabashvili12345@gmail.com",
+      "personalId": "12332131313",
+      "firstName": "Saba",
+      "lastName": "sda",
+      "dateOfBirth": "asd",
+      "category": "steak-0",
+      "status": "steak-0",
+      "id": 5
+    },
+    {
+      "email": "s.sabashvili12345@gmail.com",
+      "personalId": "21244241224",
+      "firstName": "Saba",
+      "lastName": "asd",
+      "dateOfBirth": "sad",
+      "category": "steak-0",
+      "status": "steak-0",
+      "id": 6
+    }
+  ]
+}
