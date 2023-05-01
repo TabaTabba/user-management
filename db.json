@@ -1,26 +1,6 @@
 {
   "users": [
     {
-      "email": "ads",
-      "personalId": "12345642312",
-      "firstName": "Sabaa",
-      "lastName": "ads",
-      "dateOfBirth": "sad",
-      "category": "steak-0",
-      "status": "pizza-1",
-      "id": 3
-    },
-    {
-      "email": "sd",
-      "personalId": "21424112412",
-      "firstName": "sada",
-      "lastName": "dsa",
-      "dateOfBirth": "dsa",
-      "category": "steak-0",
-      "status": "steak-0",
-      "id": 4
-    },
-    {
       "email": "s.sabashvili12345@gmail.com",
       "personalId": "12332131313",
       "firstName": "Saba",
@@ -39,6 +19,17 @@
       "category": "steak-0",
       "status": "steak-0",
       "id": 6
+    },
+    {
+      "email": "asd@ad",
+      "personalId": "23441212421",
+      "firstName": "sdsa",
+      "lastName": "dsasad",
+      "dateOfBirth": "adssad",
+      "category": "steak-0",
+      "status": "steak-0",
+      "id": 7
     }
-  ]
+  ],
+  "categories": []
 }

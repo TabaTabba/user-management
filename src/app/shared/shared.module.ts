@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "../app-routing.module";
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatIconModule } from '@angular/material/icon';
    BrowserAnimationsModule,
    AppRoutingModule,
    HttpClientModule,
-   MatIconModule
+   MatIconModule,
+   MatDialogModule
  ]
 })
 export class SharedModule{} 

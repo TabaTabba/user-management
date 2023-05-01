@@ -1,46 +1,49 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { User } from '../models/user.model';
-import { UsersService } from '../users.service';
+import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+  styleUrls: ['./user-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserListComponent implements OnInit{
-  users: User[] = [];
-
+export class UserListComponent implements OnInit, OnChanges {
+  @Input() users?: User[]
   displayedColumns: string[] = ['email', 'personalId', 'firstName', 'lastName', 'dateOfBirth', 'category', 'status', 'icons'];
   dataSource = new MatTableDataSource<User>();
 
-  constructor(private usersService: UsersService, private router: Router) {}
+  @ViewChild(MatPaginator) paginator: MatPaginator | any;
+
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe((users) => {
-      this.users = users;
-      this.dataSource = new MatTableDataSource<User>(this.users);
-    })
+    this.initializeDataSource();
   }
 
-
-  @ViewChild(MatPaginator) paginator: MatPaginator | any;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['users']) {
+      this.initializeDataSource();
+    }
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  onDelete(id: number){
-    this.usersService.deleteUser(id).subscribe(() => {
-      this.users = this.users.filter(user => user.id !== id);
-      this.dataSource.data = this.users;
-    });
+  initializeDataSource() {
+    if (this.users) {
+      this.dataSource = new MatTableDataSource<User>(this.users);
+    }
   }
 
-  onEdit(id: number){
-   this.router.navigate(['user-details/' + id]); 
+  onEdit(id: number) {
+    this.router.navigate(['user-details/' + id]);
   }
 
+  onDelete(id: number) {
+  }
 }

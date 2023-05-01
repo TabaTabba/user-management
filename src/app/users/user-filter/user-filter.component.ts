@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class UserFilterComponent implements OnInit {
   userFilterForm: FormGroup | any;
 
-  categories: Category[] = [
+  categories: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' },
@@ -47,7 +47,7 @@ export class UserFilterComponent implements OnInit {
   }
 }
 
-interface Category {
+interface Food {
   value: string;
   viewValue: string;
 }

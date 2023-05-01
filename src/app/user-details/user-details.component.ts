@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../users/models/user.model';
-import { UsersService } from '../users/users.service';
+import { User } from '../models/user.model';
+import { UserService } from '../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
-  categories: Category[] = [
+  categories: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' }
@@ -23,7 +23,7 @@ export class UserDetailsComponent implements OnInit {
   idParam: string | null = this.route.snapshot.paramMap.get('id');
   id: number | null = this.idParam ? +this.idParam : null;
 
-  constructor(private usersService: UsersService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -45,7 +45,7 @@ export class UserDetailsComponent implements OnInit {
       let status = '';
 
       this.userCreateForm = new FormGroup({
-        'email': new FormControl(email, Validators.required),
+        'email': new FormControl(email, [Validators.required, Validators.email]),
         'personalId': new FormControl(personalId, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern(/^[0-9]+$/)]),
         'firstName': new FormControl(firstName, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
         'lastName': new FormControl(lastName, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -53,10 +53,10 @@ export class UserDetailsComponent implements OnInit {
         'category': new FormControl(category, Validators.required),
         'status': new FormControl(status, Validators.required)
       })
-    } else if (this.id !== null) {
-      this.usersService.getUser(this.id).subscribe((user) => {
+    } else if(this.id !== null) {
+      this.userService.getUser(this.id).subscribe((user) => {
         this.userCreateForm = new FormGroup({
-          'email': new FormControl(user.email, Validators.required),
+          'email': new FormControl(user.email, [Validators.required, Validators.email]),
           'personalId': new FormControl(user.personalId, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern(/^[0-9]+$/)]),
           'firstName': new FormControl(user.firstName, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
           'lastName': new FormControl(user.lastName, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -82,7 +82,7 @@ export class UserDetailsComponent implements OnInit {
         status: formValues.status
       };
       if (this.userCreateForm.valid) {
-        this.usersService.addUser(user).subscribe(() => { });
+        this.userService.addUser(user).subscribe(() => { });
         this.router.navigate(['/users']);
       }
     } else if(this.userCreateForm !== undefined){
@@ -97,7 +97,7 @@ export class UserDetailsComponent implements OnInit {
         status: formValues.status
       };
       if (this.userCreateForm.valid) {
-        this.usersService.updateUser(user, this.id).subscribe(() => { });
+        this.userService.updateUser(user, this.id).subscribe(() => { });
         this.router.navigate(['/users']);
       }
     }
@@ -122,7 +122,7 @@ export class UserDetailsComponent implements OnInit {
   }
 }
 
-interface Category {
+interface Food {
   value: string;
   viewValue: string;
 }
