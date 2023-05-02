@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Status } from 'src/app/models/status.model';
@@ -9,11 +9,11 @@ import { Status } from 'src/app/models/status.model';
   styleUrls: ['./status-list.component.scss']
 })
 export class StatusListComponent {
-
   @Input() statuses?: Status[];
+  @Output() deleteEvent = new EventEmitter();
 
 
-  displayedColumns: string[] = ['status'];
+  displayedColumns: string[] = ['status', 'actions'];
   dataSource = new MatTableDataSource<Status>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
@@ -39,5 +39,9 @@ export class StatusListComponent {
     if(this.statuses){
       this.dataSource = new MatTableDataSource<Status>(this.statuses);
     }
+  }
+
+  onDelete(id: number){
+    this.deleteEvent.emit(id);
   }
 }

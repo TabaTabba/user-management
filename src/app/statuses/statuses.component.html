@@ -1,2 +1,2 @@
 <app-status-filter></app-status-filter>
-<app-status-list [statuses]="statuses"></app-status-list>
+<app-status-list [statuses]="statuses" (deleteEvent)="onDelete($event)"></app-status-list>

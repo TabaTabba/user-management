@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Category } from 'src/app/models/category.model';
@@ -11,9 +11,10 @@ import { Category } from 'src/app/models/category.model';
 })
 export class CategoryListComponent implements OnInit, OnChanges{
   @Input() categories?: Category[];
+  @Output() deleteEvent = new EventEmitter();
 
 
-  displayedColumns: string[] = ['category'];
+  displayedColumns: string[] = ['category', 'actions'];
   dataSource = new MatTableDataSource<Category>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
@@ -41,5 +42,7 @@ export class CategoryListComponent implements OnInit, OnChanges{
     }
   }
 
-
+  onDelete(id: number){
+    this.deleteEvent.emit(id);
+  }
 }

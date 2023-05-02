@@ -21,4 +21,11 @@ export class CategoriesComponent implements OnInit{
       this.categories = categories;
     })
   }
+
+  onDelete(event: any) {
+    const id = event as number;
+    this.categoryService.deleteCategory(id).subscribe(() => {
+      this.getCategories();
+    });
+  }
 }

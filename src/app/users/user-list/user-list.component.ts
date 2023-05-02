@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class UserListComponent implements OnInit, OnChanges {
   @Input() users?: User[];
   @Output() deleteEvent = new EventEmitter();
-  displayedColumns: string[] = ['email', 'personalId', 'firstName', 'lastName', 'dateOfBirth', 'category', 'status', 'icons'];
+  displayedColumns: string[] = ['email', 'personalId', 'firstName', 'lastName', 'dateOfBirth', 'category', 'status', 'actions'];
   dataSource = new MatTableDataSource<User>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;

@@ -1,2 +1,2 @@
 <app-category-filter></app-category-filter>
-<app-category-list [categories]="categories"></app-category-list>
+<app-category-list [categories]="categories" (deleteEvent)="onDelete($event)"></app-category-list>

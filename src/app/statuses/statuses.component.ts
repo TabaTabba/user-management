@@ -21,4 +21,11 @@ export class StatusesComponent {
       this.statuses = statuses;
     })
   }
+
+  onDelete(event: any) {
+    const id = event as number;
+    this.statusService.deleteStatus(id).subscribe(() => {
+      this.getStatuses();
+    });
+  }
 }

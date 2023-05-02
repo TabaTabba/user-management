@@ -28,7 +28,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    if (this.idParam == "0") {
+    if (this.id == 0) {
       this.buttonText = "Add"
     } else {
       this.buttonText = "Save"
