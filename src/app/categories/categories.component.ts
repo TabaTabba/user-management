@@ -28,4 +28,8 @@ export class CategoriesComponent implements OnInit{
       this.getCategories();
     });
   }
+
+  onAdd(category: Category){
+    this.categoryService.addCategory(category).subscribe(() => {});
+  }
 }

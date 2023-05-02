@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Category } from 'src/app/models/category.model';
+import { CategoryDetailsComponent } from '../category-details/category-details.component';
 
 @Component({
   selector: 'app-category-list',
@@ -19,7 +21,7 @@ export class CategoryListComponent implements OnInit, OnChanges{
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
-  constructor() { }
+  constructor(private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initializeDataSource();
@@ -44,5 +46,11 @@ export class CategoryListComponent implements OnInit, OnChanges{
 
   onDelete(id: number){
     this.deleteEvent.emit(id);
+  }
+
+  openDialog(){
+    this.matDialog.open(CategoryDetailsComponent,{
+      width: '350px'
+    });
   }
 }
