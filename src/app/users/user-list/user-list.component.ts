@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -19,7 +18,7 @@ export class UserListComponent implements OnInit, OnChanges {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
-  constructor(private router: Router, ) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.initializeDataSource();

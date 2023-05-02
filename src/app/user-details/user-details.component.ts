@@ -3,6 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from '../models/category.model';
+import { CategoryService } from '../services/category.service';
+import { Status } from '../models/status.model';
+import { StatusService } from '../services/status.service';
 
 @Component({
   selector: 'app-user-details',
@@ -10,11 +14,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
-  categories: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
+  categories: Category[] = [];
+  statuses: Status[] = [];
 
   userCreateForm?: FormGroup;
 
@@ -23,7 +24,7 @@ export class UserDetailsComponent implements OnInit {
   idParam: string | null = this.route.snapshot.paramMap.get('id');
   id: number | null = this.idParam ? +this.idParam : null;
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private statusService: StatusService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -32,6 +33,8 @@ export class UserDetailsComponent implements OnInit {
     } else {
       this.buttonText = "Save"
     }
+    this.getCategories();
+    this.getStatuses();
   }
 
   initForm() {
@@ -120,9 +123,16 @@ export class UserDetailsComponent implements OnInit {
       event.preventDefault();
     }
   }
-}
 
-interface Food {
-  value: string;
-  viewValue: string;
+  getCategories(){
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
+  
+  getStatuses(){
+    this.statusService.getStatuses().subscribe((statuses) => {
+      this.statuses = statuses;
+    });
+  }
 }

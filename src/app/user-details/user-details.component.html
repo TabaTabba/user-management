@@ -36,7 +36,7 @@
                     <mat-label>Category</mat-label>
                     <mat-select formControlName="category">
                         <mat-option *ngFor="let category of categories" [value]="category.value">
-                            {{category.viewValue}}
+                            {{category.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -45,8 +45,8 @@
                 <mat-form-field appearance="fill" class="field">
                     <mat-label>Status</mat-label>
                     <mat-select formControlName="status">
-                        <mat-option *ngFor="let category of categories" [value]="category.value">
-                            {{category.viewValue}}
+                        <mat-option *ngFor="let status of statuses" [value]="status.value">
+                            {{status.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

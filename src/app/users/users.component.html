@@ -1,4 +1,4 @@
 <div>
-    <app-user-filter></app-user-filter>
+    <app-user-filter [categories]="categories" [statuses]="statuses"></app-user-filter>
     <app-user-list [users]="users" (deleteEvent)="onDelete($event)"></app-user-list>
 </div>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Category } from 'src/app/models/category.model';
+import { Status } from 'src/app/models/status.model';
 
 @Component({
   selector: 'app-user-filter',
@@ -9,11 +11,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class UserFilterComponent implements OnInit {
   userFilterForm: FormGroup | any;
 
-  categories: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
+  @Input() categories?: Category[];
+  @Input() statuses?: Status[];
 
   ngOnInit(): void {
     this.initForm();
@@ -45,9 +44,4 @@ export class UserFilterComponent implements OnInit {
 
   onSubmit() {
   }
-}
-
-interface Food {
-  value: string;
-  viewValue: string;
 }
