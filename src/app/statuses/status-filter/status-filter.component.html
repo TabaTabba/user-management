@@ -1,1 +1,16 @@
-<p>status-filter works!</p>
+<div class="container">
+    <form [formGroup]="statusFilterForm">
+        <div class="form-wrapper">
+            <div class="input">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Status</mat-label>
+                    <input matInput formControlName="status">
+                </mat-form-field>
+            </div>
+            <div class="btn-wrapper">
+                <button mat-flat-button color="primary" class="btn search">Search</button>
+                <button mat-flat-button color="warn" class="btn clear" (click)="onClear()">Clear</button>
+            </div>
+        </div>
+    </form>
+</div>

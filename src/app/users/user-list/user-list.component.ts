@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../models/user.model';
@@ -12,13 +12,14 @@ import { UserService } from 'src/app/services/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent implements OnInit, OnChanges {
-  @Input() users?: User[]
+  @Input() users?: User[];
+  @Output() deleteEvent = new EventEmitter();
   displayedColumns: string[] = ['email', 'personalId', 'firstName', 'lastName', 'dateOfBirth', 'category', 'status', 'icons'];
   dataSource = new MatTableDataSource<User>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, ) { }
 
   ngOnInit(): void {
     this.initializeDataSource();
@@ -45,5 +46,6 @@ export class UserListComponent implements OnInit, OnChanges {
   }
 
   onDelete(id: number) {
+    this.deleteEvent.emit(id);
   }
 }

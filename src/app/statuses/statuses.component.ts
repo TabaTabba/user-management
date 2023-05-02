@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Status } from '../models/status.model';
+import { StatusService } from '../services/status.service';
 
 @Component({
   selector: 'app-statuses',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./statuses.component.scss']
 })
 export class StatusesComponent {
+  statuses: Status[] = [];
 
+  constructor(private statusService: StatusService) {}
+
+  ngOnInit(): void {
+    this.getStatuses();
+  }
+
+  getStatuses(){
+    this.statusService.getStatuses().subscribe((statuses) => {
+      this.statuses = statuses;
+    })
+  }
 }

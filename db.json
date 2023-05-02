@@ -1,35 +1,36 @@
 {
   "users": [
     {
-      "email": "s.sabashvili12345@gmail.com",
-      "personalId": "12332131313",
-      "firstName": "Saba",
-      "lastName": "sda",
-      "dateOfBirth": "asd",
+      "email": "dsaads@dada",
+      "personalId": "23414212412",
+      "firstName": "dsadsa",
+      "lastName": "adsdsa",
+      "dateOfBirth": "adsads",
       "category": "steak-0",
       "status": "steak-0",
-      "id": 5
+      "id": 1
     },
     {
-      "email": "s.sabashvili12345@gmail.com",
-      "personalId": "21244241224",
-      "firstName": "Saba",
-      "lastName": "asd",
-      "dateOfBirth": "sad",
+      "email": "sadads@dsadas",
+      "personalId": "21344214121",
+      "firstName": "sdaads",
+      "lastName": "saads",
+      "dateOfBirth": "dsaads",
       "category": "steak-0",
       "status": "steak-0",
-      "id": 6
-    },
-    {
-      "email": "asd@ad",
-      "personalId": "23441212421",
-      "firstName": "sdsa",
-      "lastName": "dsasad",
-      "dateOfBirth": "adssad",
-      "category": "steak-0",
-      "status": "steak-0",
-      "id": 7
+      "id": 2
     }
   ],
-  "categories": []
+  "categories": [
+    {
+      "id": 1,
+      "value": "category"
+    }
+  ],
+  "statuses": [
+    {
+      "id": 1,
+      "value": "active"
+    }
+  ]
 }

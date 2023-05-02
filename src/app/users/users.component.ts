@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.model';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -18,12 +17,13 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().pipe(tap(() => {})).subscribe((users) => {
+    this.userService.getUsers().subscribe((users) => {
       this.users = users;
     })
   }
 
-  onDelete(id: number) {
+  onDelete(event: any) {
+    const id = event as number;
     this.userService.deleteUser(id).subscribe(() => {
       this.getUsers();
     });

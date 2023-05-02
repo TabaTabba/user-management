@@ -1,38 +1,45 @@
-import { Component, Inject, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Category } from 'src/app/models/category.model';
-import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.scss']
+  styleUrls: ['./category-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryListComponent {
+export class CategoryListComponent implements OnInit, OnChanges{
+  @Input() categories?: Category[];
+
 
   displayedColumns: string[] = ['category'];
-  dataSource = new MatTableDataSource<Category>(CATEGORY_DATA);
-
-
+  dataSource = new MatTableDataSource<Category>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
-  constructor(private categoryService: CategoryService, public dialog: MatDialog) { }
+  constructor() { }
+
+  ngOnInit(): void {
+    this.initializeDataSource();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['categories']){
+      this.initializeDataSource();
+    }
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
+  
+  initializeDataSource(){
+    if(this.categories){
+      this.dataSource = new MatTableDataSource<Category>(this.categories);
+    }
+  }
+
 
 }
-
-const CATEGORY_DATA: Category[] = [
-  { value: 'H' },
-  { value: 'H' },
-  { value: 'H' },
-  { value: 'H' }
-];
-
-
