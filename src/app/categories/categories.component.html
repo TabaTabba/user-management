@@ -1,3 +1,8 @@
 <app-category-filter></app-category-filter>
+<div class="btn-wrapper">
+    <mat-dialog-actions>
+        <button class="btn" mat-flat-button color="primary" (click)="openDialog()">Add Category</button>
+    </mat-dialog-actions>
+</div>
 <app-category-list [categories]="categories" (deleteEvent)="onDelete($event)"></app-category-list>
-<app-category-details *ngIf="false" (addEvent)="onAdd($event)"></app-category-details>
+<app-category-details (addEvent)="onAdd($event)"></app-category-details>

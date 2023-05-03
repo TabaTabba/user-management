@@ -28,4 +28,10 @@ export class StatusesComponent {
       this.getStatuses();
     });
   }
+
+  onAdd(status: Status){
+    this.statusService.addStatus(status).subscribe(() => {
+      this.getStatuses();
+    });
+  }
 }

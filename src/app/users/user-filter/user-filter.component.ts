@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Category } from 'src/app/models/category.model';
 import { Status } from 'src/app/models/status.model';
@@ -13,6 +13,8 @@ export class UserFilterComponent implements OnInit {
 
   @Input() categories?: Category[];
   @Input() statuses?: Status[];
+  
+  @Output() filterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.initForm();
@@ -43,5 +45,7 @@ export class UserFilterComponent implements OnInit {
   }
 
   onSubmit() {
+    const filterValues = this.userFilterForm.value;
+    this.filterEvent.emit(filterValues);
   }
 }

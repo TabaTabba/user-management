@@ -10,7 +10,7 @@ import { Category } from 'src/app/models/category.model';
 export class CategoryDetailsComponent implements OnInit {
   categoryDetailsForm: FormGroup | any;
 
-  @Output() addEvent = new EventEmitter();
+  @Output() addEvent = new EventEmitter<Category>();
 
   ngOnInit(): void {
     this.initForm();
@@ -23,10 +23,6 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   onSubmit() {
-    const formValues = this.categoryDetailsForm.value;
-    const category: Category = {
-      value: formValues.value
-    }
-    this.addEvent.emit(category);
+    this.addEvent.emit(this.categoryDetailsForm.value.category);
   }
 }

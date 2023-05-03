@@ -21,7 +21,7 @@ export class CategoryListComponent implements OnInit, OnChanges{
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
-  constructor(private matDialog: MatDialog) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.initializeDataSource();
@@ -46,11 +46,5 @@ export class CategoryListComponent implements OnInit, OnChanges{
 
   onDelete(id: number){
     this.deleteEvent.emit(id);
-  }
-
-  openDialog(){
-    this.matDialog.open(CategoryDetailsComponent,{
-      width: '350px'
-    });
   }
 }

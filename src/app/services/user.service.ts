@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,37 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:3000/users');
   }
+  
+  filterUsers(filterValues: any): Observable<User[]> {
+  return this.getUsers().pipe(
+    map((users: User[]) => {
+      return users.filter((user: User) => {
+        let isMatch = true;
+
+        for (const key in filterValues) {
+          if (filterValues.hasOwnProperty(key) && filterValues[key]) {
+            if (key === 'email' || key === 'firstName' || key === 'lastName') {
+              if (!user[key]!.toLowerCase().includes(filterValues[key].toLowerCase())) {
+                isMatch = false;
+                break;
+              }
+            } else {
+              if (user[key] !== filterValues[key]) {
+                isMatch = false;
+                break;
+              }
+            }
+          }
+        }
+
+        return isMatch;
+      });
+    })
+  );
+}
+
+  
+  
 
   addUser(user: User): Observable<User> {
     return this.http.post('http://localhost:3000/users', user);

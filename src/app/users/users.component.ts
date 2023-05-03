@@ -12,7 +12,7 @@ import { Status } from '../models/status.model';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  users: User[] = [];
+  filteredUsers: User[] = [];
   categories: Category[] = [];
   statuses: Status[] = [];
 
@@ -26,7 +26,7 @@ export class UsersComponent implements OnInit {
 
   getUsers() {
     this.userService.getUsers().subscribe((users) => {
-      this.users = users;
+      this.filteredUsers = users;
     })
   }
 
@@ -46,6 +46,12 @@ export class UsersComponent implements OnInit {
   getStatuses(){
     this.statusService.getStatuses().subscribe((statuses) => {
       this.statuses = statuses;
+    });
+  }
+
+  onFilter(filterValues: any) {
+    this.userService.filterUsers(filterValues).subscribe((users) => {
+      this.filteredUsers = users;
     });
   }
 }

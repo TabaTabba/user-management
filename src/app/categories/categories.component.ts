@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category.model';
+import { MatDialog } from '@angular/material/dialog';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements OnInit{
+export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getCategories();
   }
 
-  getCategories(){
+  getCategories() {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
     })
@@ -29,7 +31,16 @@ export class CategoriesComponent implements OnInit{
     });
   }
 
-  onAdd(category: Category){
-    this.categoryService.addCategory(category).subscribe(() => {});
+  onAdd(category: Category) {
+    console.log(category,  'onadd')
+    this.categoryService.addCategory(category).subscribe(() => {
+      this.getCategories();
+    });
+  }
+
+  openDialog() {
+    this.matDialog.open(CategoryDetailsComponent, {
+      width: '350px'
+    });
   }
 }

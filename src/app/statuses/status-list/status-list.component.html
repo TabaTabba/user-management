@@ -1,6 +1,8 @@
 <div class="container">
     <div class="btn-wrapper">
-        <button class="btn" mat-flat-button color="primary">Add Status</button>
+        <mat-dialog-actions>
+            <button class="btn" mat-flat-button color="primary" (click)="openDialog()">Add Status</button>
+        </mat-dialog-actions>
     </div>
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -8,19 +10,19 @@
                 <th mat-header-cell *matHeaderCellDef> Status </th>
                 <td mat-cell *matCellDef="let status"> {{status.value}} </td>
             </ng-container>
-            
+
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let status"><mat-icon class="icon" (click)="onDelete(status.id)">delete</mat-icon>&nbsp;&nbsp;<mat-icon
+                <td mat-cell *matCellDef="let status"><mat-icon class="icon"
+                        (click)="onDelete(status.id)">delete</mat-icon>&nbsp;&nbsp;<mat-icon
                         class="icon">edit</mat-icon></td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-            aria-label="Select page of periodic elements">
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of statuses">
         </mat-paginator>
     </div>
 </div>
