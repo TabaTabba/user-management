@@ -12,7 +12,9 @@ import { CategoryDetailsComponent } from './category-details/category-details.co
 export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoryService, private matDialog: MatDialog) { }
+  category: Category = {};
+
+  constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getCategories();
@@ -32,15 +34,16 @@ export class CategoriesComponent implements OnInit {
   }
 
   onAdd(category: Category) {
-    console.log(category,  'onadd')
     this.categoryService.addCategory(category).subscribe(() => {
       this.getCategories();
     });
   }
-
-  openDialog() {
-    this.matDialog.open(CategoryDetailsComponent, {
-      width: '350px'
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CategoryDetailsComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      this.category = { value: result };
+      this.onAdd(this.category);
     });
   }
 }

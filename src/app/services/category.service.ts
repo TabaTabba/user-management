@@ -20,6 +20,7 @@ export class CategoryService {
   }
 
   addCategory(category: Category): Observable<Category> {
+    debugger
     return this.http.post('http://localhost:3000/categories', category);
   }
 

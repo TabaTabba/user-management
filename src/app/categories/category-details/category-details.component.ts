@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Category } from 'src/app/models/category.model';
 
 @Component({
@@ -7,22 +7,16 @@ import { Category } from 'src/app/models/category.model';
   templateUrl: './category-details.component.html',
   styleUrls: ['./category-details.component.scss']
 })
-export class CategoryDetailsComponent implements OnInit {
-  categoryDetailsForm: FormGroup | any;
+export class CategoryDetailsComponent {
+  category: Category = {id : 1, value :'ca'}
 
-  @Output() addEvent = new EventEmitter<Category>();
+  constructor(
+    public dialogRef: MatDialogRef<CategoryDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Category
+    ) { }
 
-  ngOnInit(): void {
-    this.initForm();
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
-  initForm() {
-    this.categoryDetailsForm = new FormGroup({
-      'category': new FormControl('', Validators.required)
-    })
-  }
-
-  onSubmit() {
-    this.addEvent.emit(this.categoryDetailsForm.value.category);
-  }
 }

@@ -25,6 +25,10 @@
     {
       "id": 1,
       "value": "category"
+    },
+    {
+      "value": "asd",
+      "id": 4
     }
   ],
   "statuses": [
