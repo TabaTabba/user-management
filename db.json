@@ -19,16 +19,22 @@
       "category": "category",
       "status": "offline",
       "id": 4
+    },
+    {
+      "email": "s.sabashvili12345@gmail.com",
+      "personalId": "12342112124",
+      "firstName": "sadads",
+      "lastName": "asddas",
+      "dateOfBirth": "asd",
+      "category": "category",
+      "status": "online",
+      "id": 5
     }
   ],
   "categories": [
     {
       "id": 1,
       "value": "category"
-    },
-    {
-      "value": "asd",
-      "id": 4
     }
   ],
   "statuses": [

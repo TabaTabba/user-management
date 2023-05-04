@@ -8,7 +8,7 @@ import { Category } from 'src/app/models/category.model';
   styleUrls: ['./category-details.component.scss']
 })
 export class CategoryDetailsComponent {
-  category: Category = {id : 1, value :'ca'}
+  category: Category = {};
 
   constructor(
     public dialogRef: MatDialogRef<CategoryDetailsComponent>,

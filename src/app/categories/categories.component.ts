@@ -38,12 +38,17 @@ export class CategoriesComponent implements OnInit {
       this.getCategories();
     });
   }
-  
+
   openDialog(): void {
-    const dialogRef = this.dialog.open(CategoryDetailsComponent, {});
+    const dialogRef = this.dialog.open(CategoryDetailsComponent, {
+      data: this.category.value
+    });
     dialogRef.afterClosed().subscribe(result => {
-      this.category = { value: result };
-      this.onAdd(this.category);
+      if (result) {
+        this.category = result;
+        this.onAdd(this.category);
+        this.category = {};
+      }
     });
   }
 }

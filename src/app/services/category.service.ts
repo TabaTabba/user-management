@@ -20,7 +20,6 @@ export class CategoryService {
   }
 
   addCategory(category: Category): Observable<Category> {
-    debugger
     return this.http.post('http://localhost:3000/categories', category);
   }
 
@@ -29,7 +28,7 @@ export class CategoryService {
     return this.http.delete<Category>(url);
   }
   
-  updateCategory(category: Category, id: number) {
+  updateCategory(category: Category, id: number): Observable<Category> {
     const url = 'http://localhost:3000/categories/' + id;
     return this.http.put<Category>(url, category);
   }
