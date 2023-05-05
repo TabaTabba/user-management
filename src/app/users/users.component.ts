@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
     })
   }
 
-  onDelete(event: any) {
+  deleteUser(event: any) {
     const id = event as number;
     this.userService.deleteUser(id).subscribe(() => {
       this.getUsers();
@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  onFilter(filterValues: any) {
+  filterUsers(filterValues: any) {
     this.userService.filterUsers(filterValues).subscribe((users) => {
       this.filteredUsers = users;
     });

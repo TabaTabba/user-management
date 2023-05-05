@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class CategoryFilterComponent implements OnInit {
 
   categoryFilterForm: FormGroup | any;
+  
+  @Output() filterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.initForm();
@@ -16,12 +18,16 @@ export class CategoryFilterComponent implements OnInit {
 
   initForm(){
     this.categoryFilterForm = new FormGroup({
-      'category': new FormControl('')
+      'value': new FormControl('')
     })
   }
 
-
   onClear() {
     this.categoryFilterForm.reset();
+  }
+
+  onSubmit(){
+    const filterValues = this.categoryFilterForm.value;
+    this.filterEvent.emit(filterValues);
   }
 }

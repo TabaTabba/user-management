@@ -1,4 +1,4 @@
-<app-category-filter></app-category-filter>
+<app-category-filter (filterEvent)="filterCategories($event)"></app-category-filter>
 <div class="btn-wrapper">
     <mat-dialog-actions>
         <button class="btn" mat-flat-button color="primary" (click)="openDialog()">Add Category</button>
