@@ -4,4 +4,4 @@
         <button class="btn" mat-flat-button color="primary" (click)="openDialog()">Add Category</button>
     </mat-dialog-actions>
 </div>
-<app-category-list [categories]="categories" (deleteEvent)="onDelete($event)"></app-category-list>
+<app-category-list [categories]="categories" (deleteEvent)="deleteCategory($event)" (editEvent)="editCategory($event)"></app-category-list>

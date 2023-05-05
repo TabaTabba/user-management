@@ -1,5 +1,5 @@
 <div class="container">
-    <form *ngIf="userCreateForm" [formGroup]="userCreateForm" >
+    <form *ngIf="userCreateForm" [formGroup]="userCreateForm" (ngSubmit)="onSubmit()">
         <div class="form-wrapper">
             <div class="input">
                 <mat-form-field class="example-full-width field">
@@ -53,7 +53,7 @@
             </div>
             <div class="btn-wrapper">
                 <button mat-flat-button color="warn" routerLink="/users" class="btn cancel">Cancel</button>
-                <button mat-flat-button class="btn add"  (click)="onSubmit()">{{ buttonText }}</button>
+                <button mat-flat-button class="btn add"  type="submit">{{ buttonText }}</button>
             </div>
         </div>
     </form>

@@ -14,6 +14,8 @@ export class CategoriesComponent implements OnInit {
 
   category: Category = {};
 
+  text: string = 'Edit';
+
   constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -26,28 +28,36 @@ export class CategoriesComponent implements OnInit {
     })
   }
 
-  onDelete(event: any) {
+  deleteCategory(event: any) {
     const id = event as number;
     this.categoryService.deleteCategory(id).subscribe(() => {
       this.getCategories();
     });
   }
 
-  onAdd(category: Category) {
+  addCategory(category: Category) {
     this.categoryService.addCategory(category).subscribe(() => {
       this.getCategories();
     });
   }
 
+  editCategory(category: Category) {
+    if (category.value && category.id) {
+      this.categoryService.updateCategory(category.value, category.id).subscribe(() => {
+        this.getCategories();
+      });
+    }
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(CategoryDetailsComponent, {
-      data: this.category.value
+      data: null
     });
+    dialogRef.componentInstance.dialogTitle = 'Add Category';
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.category = result;
-        this.onAdd(this.category);
-        this.category = {};
+        this.addCategory(result);
       }
     });
   }

@@ -56,7 +56,7 @@ export class UserDetailsComponent implements OnInit {
         'category': new FormControl(category, Validators.required),
         'status': new FormControl(status, Validators.required)
       })
-    } else if(this.id !== null) {
+    } else if(this.id) {
       this.userService.getUser(this.id).subscribe((user) => {
         this.userCreateForm = new FormGroup({
           'email': new FormControl(user.email, [Validators.required, Validators.email]),
@@ -73,7 +73,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.id == 0 && this.userCreateForm !== undefined) {
+    if (this.id == 0 && this.userCreateForm) {
       const formValues = this.userCreateForm.value;
       const user: User = {
         email: formValues.email,

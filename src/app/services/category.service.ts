@@ -28,8 +28,8 @@ export class CategoryService {
     return this.http.delete<Category>(url);
   }
   
-  updateCategory(category: Category, id: number): Observable<Category> {
+  updateCategory(value: string, id: number): Observable<Category> {
     const url = 'http://localhost:3000/categories/' + id;
-    return this.http.put<Category>(url, category);
+    return this.http.put<Category>(url, value);
   }
 }
