@@ -23,7 +23,7 @@ export class CategoriesComponent implements OnInit {
 
   getCategories() {
     this.categoryService.getCategories().subscribe((categories) => {
-      this.categories = categories;
+      this.categories = categories.reverse();
     })
   }
 

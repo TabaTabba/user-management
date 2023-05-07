@@ -43,6 +43,8 @@ export class CategoryListComponent implements OnInit, OnChanges {
   initializeDataSource() {
     if (this.categories) {
       this.dataSource = new MatTableDataSource<Category>(this.categories);
+      this.dataSource.paginator = this.paginator;
+      this.paginator.length = this.categories.length;
     }
   }
 

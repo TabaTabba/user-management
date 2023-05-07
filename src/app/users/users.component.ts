@@ -26,7 +26,7 @@ export class UsersComponent implements OnInit {
 
   getUsers() {
     this.userService.getUsers().subscribe((users) => {
-      this.filteredUsers = users;
+      this.filteredUsers = users.reverse();
     })
   }
 

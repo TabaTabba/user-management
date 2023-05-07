@@ -42,6 +42,8 @@ export class StatusListComponent {
   initializeDataSource() {
     if (this.statuses) {
       this.dataSource = new MatTableDataSource<Status>(this.statuses);
+      this.dataSource.paginator = this.paginator;
+      this.paginator.length = this.statuses.length;
     }
   }
 

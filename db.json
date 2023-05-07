@@ -33,16 +33,16 @@
   ],
   "categories": [
     {
-      "value": "qwerty",
-      "id": 1
+      "value": "qwe",
+      "id": 9
     },
     {
       "value": "asd",
-      "id": 2
+      "id": 10
     },
     {
-      "value": "asdf",
-      "id": 3
+      "value": "zxc",
+      "id": 11
     }
   ],
   "statuses": [

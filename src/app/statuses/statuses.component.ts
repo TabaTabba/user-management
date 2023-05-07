@@ -23,7 +23,7 @@ export class StatusesComponent {
 
   getStatuses() {
     this.statusService.getStatuses().subscribe((statuses) => {
-      this.statuses = statuses;
+      this.statuses = statuses.reverse();
     })
   }
 
