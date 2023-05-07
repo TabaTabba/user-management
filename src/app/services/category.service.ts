@@ -10,12 +10,13 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
+
   getCategory(id: number): Observable<Category> {
     const url = 'http://localhost:3000/categories/' + id;
     return this.http.get<Category>(url);
   }
 
-  getCategories(filter?: string): Observable<Category[]> {
+  getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>('http://localhost:3000/categories');
   }
 
@@ -44,12 +45,10 @@ export class CategoryService {
             if (filterValues.hasOwnProperty(key) && filterValues[key]) {
               if (key === "value") {
                 if (!category[key] || !category[key]!.toLowerCase().includes(filterValues[key].toLowerCase())) {
-                  console.log(category[key])
                   isMatch = false;
                   break;
                 }
               } else if(category[key] === undefined && category[key] !== filterValues[key]){
-                  console.log(category[key])
                   isMatch = false;
                   break;
               }

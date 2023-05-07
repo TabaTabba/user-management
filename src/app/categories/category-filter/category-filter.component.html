@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="categoryFilterForm">
+    <form [formGroup]="categoryFilterForm" (ngSubmit)="onSubmit()">
         <div class="form-wrapper">
             <div class="input">
                 <mat-form-field class="example-full-width">
@@ -8,7 +8,7 @@
                 </mat-form-field>
             </div>
             <div class="btn-wrapper">
-                <button mat-flat-button color="primary" class="btn search" (click)="onSubmit()">Search</button>
+                <button mat-flat-button color="primary" class="btn search" type="submit">Search</button>
                 <button mat-flat-button color="warn" class="btn clear" (click)="onClear()">Clear</button>
             </div>
         </div>

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { CategoryDetailsComponent } from 'src/app/categories/category-details/category-details.component';
 import { Status } from 'src/app/models/status.model';
 import { StatusDetailsComponent } from '../status-details/status-details.component';
 
@@ -14,21 +13,23 @@ import { StatusDetailsComponent } from '../status-details/status-details.compone
 export class StatusListComponent {
   @Input() statuses?: Status[];
   @Output() deleteEvent = new EventEmitter();
+  @Output() editEvent = new EventEmitter<Status>();
 
+  status: Status = {};
 
   displayedColumns: string[] = ['status', 'actions'];
   dataSource = new MatTableDataSource<Status>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | any;
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initializeDataSource();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['statuses']){
+    if (changes['statuses']) {
       this.initializeDataSource();
     }
   }
@@ -37,20 +38,27 @@ export class StatusListComponent {
     this.dataSource.paginator = this.paginator;
   }
 
-  
-  initializeDataSource(){
-    if(this.statuses){
+
+  initializeDataSource() {
+    if (this.statuses) {
       this.dataSource = new MatTableDataSource<Status>(this.statuses);
     }
   }
 
-  onDelete(id: number){
+  onDelete(id: number) {
     this.deleteEvent.emit(id);
   }
-  
-  openDialog(){
-    this.matDialog.open(StatusDetailsComponent,{
-      width: '350px'
+
+  openDialog(status: Status) {
+    const dialogRef = this.dialog.open(StatusDetailsComponent, {
+      data: status
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        status.value = result;
+        this.editEvent.emit(status); 
+      }
     });
   }
 }

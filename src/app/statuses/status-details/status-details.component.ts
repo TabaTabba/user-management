@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Status } from 'src/app/models/status.model';
 
 @Component({
@@ -8,24 +8,21 @@ import { Status } from 'src/app/models/status.model';
   styleUrls: ['./status-details.component.scss']
 })
 export class StatusDetailsComponent implements OnInit {
-  statusDetailsForm: FormGroup | any;
+  status: Status = {};
+  @Input() dialogTitle: string = 'Edit status';
 
-  @Output() addEvent = new EventEmitter();
+  constructor(
+    public dialogRef: MatDialogRef<StatusDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Status
+  ) { }
 
   ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm() {
-    this.statusDetailsForm = new FormGroup({
-      'status': new FormControl('', Validators.required)
-    })
-  }
-
-  onSubmit() {
-    const status: Status = {
-      value: this.statusDetailsForm.value.status
+    if(this.data){
+      this.status = { ...this.data};
     }
-    this.addEvent.emit(status);
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

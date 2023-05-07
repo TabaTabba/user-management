@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Status } from '../models/status.model';
 import { StatusService } from '../services/status.service';
+import { MatDialog } from '@angular/material/dialog';
+import { StatusDetailsComponent } from './status-details/status-details.component';
 
 @Component({
   selector: 'app-statuses',
@@ -10,28 +12,59 @@ import { StatusService } from '../services/status.service';
 export class StatusesComponent {
   statuses: Status[] = [];
 
-  constructor(private statusService: StatusService) {}
+  status: Status = {};
+  
+
+  constructor(private statusService: StatusService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getStatuses();
   }
 
-  getStatuses(){
+  getStatuses() {
     this.statusService.getStatuses().subscribe((statuses) => {
       this.statuses = statuses;
     })
   }
 
-  onDelete(event: any) {
+  deleteStatus(event: any) {
     const id = event as number;
     this.statusService.deleteStatus(id).subscribe(() => {
       this.getStatuses();
     });
   }
 
-  onAdd(status: Status){
+  addStatus(status: Status) {
     this.statusService.addStatus(status).subscribe(() => {
       this.getStatuses();
     });
+  }
+
+  editStatus(status: Status) {
+    if (status.value && status.id) {
+      this.statusService.updateStatus(status.value, status.id).subscribe(() => {
+        this.getStatuses();
+      });
+    }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(StatusDetailsComponent, {
+      data: null
+    });
+    dialogRef.componentInstance.dialogTitle = 'Add Status';
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.addStatus(result);
+      }
+    });
+  }
+
+  filterStatuses(filterValues: any) {
+    this.statusService.filterStatuses(filterValues).subscribe((statuses) => {
+      this.statuses = statuses;
+    });
+
   }
 }

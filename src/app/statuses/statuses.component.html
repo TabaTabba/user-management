@@ -1,3 +1,7 @@
-<app-status-filter></app-status-filter>
-<app-status-list [statuses]="statuses" (deleteEvent)="onDelete($event)"></app-status-list>
-<app-status-details (addEvent)="onAdd($event)"></app-status-details>
+<app-status-filter (filterEvent)="filterStatuses($event)"></app-status-filter>
+<div class="btn-wrapper">
+    <mat-dialog-actions>
+        <button class="btn" mat-flat-button color="primary" (click)="openDialog()">Add Status</button>
+    </mat-dialog-actions>
+</div>
+<app-status-list [statuses]="statuses" (deleteEvent)="deleteStatus($event)" (editEvent)="editStatus($event)"></app-status-list>

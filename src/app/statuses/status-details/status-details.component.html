@@ -1,20 +1,11 @@
-<div class="container">
-    <form [formGroup]="statusDetailsForm">
-        <div class="form-wrapper">
-            <button mat-icon-button class="btn close" matDialogClose>
-                <mat-icon>close</mat-icon>
-            </button>
-            <div class="add-wrapper">
-                <mat-dialog-content class="input">
-                    <h1>Add Status</h1>
-                    <mat-form-field>
-                        <input matInput placeholder="Status" formControlName="status">
-                    </mat-form-field>
-                </mat-dialog-content>
-                <mat-dialog-actions class="btn">
-                    <button mat-flat-button color="primary" (click)="onSubmit()">Add</button>
-                </mat-dialog-actions>
-            </div>
-        </div>
-    </form>
+<div mat-dialog-content>
+    <p>{{dialogTitle}}</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <input matInput [(ngModel)]="status.value">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions style="float: right;">
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="status" cdkFocusInitial>Ok</button>
 </div>

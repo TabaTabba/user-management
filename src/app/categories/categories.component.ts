@@ -13,10 +13,7 @@ export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
 
   category: Category = {};
-
-  text: string = 'Edit';
   
-  filteredCategories: Category[] = [];
 
   constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
 
@@ -66,7 +63,8 @@ export class CategoriesComponent implements OnInit {
 
   filterCategories(filterValues: any) {
     this.categoryService.filterCategories(filterValues).subscribe((categories) => {
-      this.filteredCategories = categories;
+      this.categories = categories;
     });
+
   }
 }

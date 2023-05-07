@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class StatusFilterComponent {
 
   statusFilterForm: FormGroup | any;
+  
+  @Output() filterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.initForm();
@@ -16,12 +18,16 @@ export class StatusFilterComponent {
 
   initForm(){
     this.statusFilterForm = new FormGroup({
-      'status': new FormControl('')
+      'value': new FormControl('')
     })
   }
 
-
   onClear() {
     this.statusFilterForm.reset();
+  }
+
+  onSubmit(){
+    const filterValues = this.statusFilterForm.value;
+    this.filterEvent.emit(filterValues);
   }
 }
