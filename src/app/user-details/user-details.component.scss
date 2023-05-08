@@ -1,16 +1,32 @@
 .container {
-    .form-wrapper {
-        .input{
-            width: 500px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 
-            .field{
+    .form-wrapper {
+        width: 500px;
+        padding: 20px;
+        background-color: #afb3b9;
+        border-radius: 5px;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+
+        .input {
+            margin-bottom: 15px;
+
+            .field {
                 width: 100%;
             }
         }
+
         .btn-wrapper {
-            .btn{
+            display: flex;
+            justify-content: end;
+            margin-top: 20px;
+
+            .btn {
                 margin-left: 15px;
             }
+
             .add {
                 background-color: #24a0ed;
                 color: white;

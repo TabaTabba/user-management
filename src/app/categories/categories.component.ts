@@ -13,7 +13,7 @@ export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
 
   category: Category = {};
-  
+
 
   constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
 
@@ -35,9 +35,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   addCategory(category: Category) {
-    this.categoryService.addCategory(category).subscribe(() => {
-      this.getCategories();
-    });
+    if (category.value) {
+      this.categoryService.addCategory(category).subscribe(() => {
+        this.getCategories();
+      });
+    }
   }
 
   editCategory(category: Category) {

@@ -4,7 +4,7 @@ export class User{
     personalId?: string;
     firstName?: string;
     lastName?: string;
-    dateOfBirth?: string;
+    dateOfBirth?: Date;
     category?: string;
     status?: string;
     [key: string]: any;

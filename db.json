@@ -34,14 +34,30 @@
   "categories": [
     {
       "value": "qwe",
-      "id": 9
-    },
-    {
-      "value": "asd",
-      "id": 10
+      "id": 1
     },
     {
       "value": "zxc",
+      "id": 3
+    },
+    {
+      "value": "sdf",
+      "id": 7
+    },
+    {
+      "value": "sdg",
+      "id": 8
+    },
+    {
+      "value": "sdg",
+      "id": 9
+    },
+    {
+      "value": "ads",
+      "id": 10
+    },
+    {
+      "value": "asd",
       "id": 11
     }
   ],

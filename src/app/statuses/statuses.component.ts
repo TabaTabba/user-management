@@ -13,7 +13,7 @@ export class StatusesComponent {
   statuses: Status[] = [];
 
   status: Status = {};
-  
+
 
   constructor(private statusService: StatusService, private dialog: MatDialog) { }
 
@@ -35,9 +35,11 @@ export class StatusesComponent {
   }
 
   addStatus(status: Status) {
-    this.statusService.addStatus(status).subscribe(() => {
-      this.getStatuses();
-    });
+    if (status.value) {
+      this.statusService.addStatus(status).subscribe(() => {
+        this.getStatuses();
+      });
+    }
   }
 
   editStatus(status: Status) {
