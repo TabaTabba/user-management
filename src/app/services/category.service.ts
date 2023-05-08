@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, filter, map } from 'rxjs';
-import { Category } from '../models/category.model';
+import { Observable, count, map } from 'rxjs';
+import { Category } from '../models/categories/category.model';
+import { CategoryFilter } from '../models/categories/category-filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,26 @@ export class CategoryService {
     return this.http.get<Category[]>('http://localhost:3000/categories');
   }
 
+  getCategoriesWithCount(categoryFilter: CategoryFilter) {
+    if (categoryFilter.value) {
+      return this.http.get<Category[]>(`http://localhost:3000/categories?q=${categoryFilter.value}&_page=1&_limit=1`, { observe: 'response' })
+        .pipe(map(response => {
+          return {
+            data: response?.body,
+            count: +(response?.headers.get('X-Total-Count')!)
+          };
+        }));
+    }else{
+      return this.http.get<Category[]>(`http://localhost:3000/categories?_page=1&_limit=10`, { observe: 'response' })
+        .pipe(map(response => {
+          return {
+            data: response?.body,
+            count: +(response?.headers.get('X-Total-Count')!)
+          };
+        }));
+    }
+  }
+
   addCategory(category: Category): Observable<Category> {
     return this.http.post('http://localhost:3000/categories', category);
   }
@@ -32,32 +53,5 @@ export class CategoryService {
   updateCategory(value: string, id: number): Observable<Category> {
     const url = 'http://localhost:3000/categories/' + id;
     return this.http.put<Category>(url, value);
-  }
-
-  filterCategories(filterValues: any): Observable<Category[]> {
-    return this.getCategories().pipe(
-      map((categories: Category[]) => {
-
-        return categories.filter((category: Category) => {
-          let isMatch = true;
-
-          for (const key in filterValues) {
-            if (filterValues.hasOwnProperty(key) && filterValues[key]) {
-              if (key === "value") {
-                if (!category[key] || !category[key]!.toLowerCase().includes(filterValues[key].toLowerCase())) {
-                  isMatch = false;
-                  break;
-                }
-              } else if(category[key] === undefined && category[key] !== filterValues[key]){
-                  isMatch = false;
-                  break;
-              }
-            }
-
-          }
-          return isMatch;
-        });
-      })
-    );
   }
 }

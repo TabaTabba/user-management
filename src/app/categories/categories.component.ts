@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category.service';
-import { Category } from '../models/category.model';
+import { Category } from '../models/categories/category.model';
 import { MatDialog } from '@angular/material/dialog';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { CategoryFilter } from '../models/categories/category-filter.model';
 
 @Component({
   selector: 'app-categories',
@@ -10,34 +11,38 @@ import { CategoryDetailsComponent } from './category-details/category-details.co
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
+  categoryCount?: number;
   categories: Category[] = [];
 
   category: Category = {};
 
+  categoryFilter : CategoryFilter = {}
 
   constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getCategories();
+    this.getCategories(this.categoryFilter);
   }
 
-  getCategories() {
-    this.categoryService.getCategories().subscribe((categories) => {
-      this.categories = categories.reverse();
-    })
+  getCategories(categoryFilter: CategoryFilter) {
+    this.categoryService.getCategoriesWithCount(categoryFilter).subscribe((categories) => {
+      this.categories = categories.data || []
+      this.categoryCount = categories.count
+      console.log(this.categoryCount)
+    });
   }
 
   deleteCategory(event: any) {
     const id = event as number;
     this.categoryService.deleteCategory(id).subscribe(() => {
-      this.getCategories();
+      this.getCategories(this.categoryFilter);
     });
   }
 
   addCategory(category: Category) {
     if (category.value) {
       this.categoryService.addCategory(category).subscribe(() => {
-        this.getCategories();
+        this.getCategories(this.categoryFilter);
       });
     }
   }
@@ -45,7 +50,7 @@ export class CategoriesComponent implements OnInit {
   editCategory(category: Category) {
     if (category.value && category.id) {
       this.categoryService.updateCategory(category.value, category.id).subscribe(() => {
-        this.getCategories();
+        this.getCategories(this.categoryFilter);
       });
     }
   }
@@ -63,10 +68,10 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  filterCategories(filterValues: any) {
-    this.categoryService.filterCategories(filterValues).subscribe((categories) => {
-      this.categories = categories;
-    });
-
+  filterCategories(value: string){
+    this.categoryFilter.value = value;
+    this.categoryFilter._page = 1;
+    this.categoryFilter._limit = 1;
+    this.getCategories(this.categoryFilter);
   }
 }

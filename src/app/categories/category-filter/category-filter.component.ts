@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-category-filter',
@@ -9,14 +9,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CategoryFilterComponent implements OnInit {
 
   categoryFilterForm: FormGroup | any;
-  
+
   @Output() filterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.categoryFilterForm = new FormGroup({
       'value': new FormControl('')
     })
@@ -26,8 +26,8 @@ export class CategoryFilterComponent implements OnInit {
     this.categoryFilterForm.reset();
   }
 
-  onSubmit(){
-    const filterValues = this.categoryFilterForm.value;
+  onSubmit() {
+    const filterValues = this.categoryFilterForm.value.value;
     this.filterEvent.emit(filterValues);
   }
 }

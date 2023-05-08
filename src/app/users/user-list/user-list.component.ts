@@ -35,7 +35,7 @@ export class UserListComponent implements OnInit, OnChanges {
   }
 
   initializeDataSource() {
-    if (this.users) {
+    if (this.users && this.paginator) {
       this.dataSource = new MatTableDataSource<User>(this.users);
       this.dataSource.paginator = this.paginator;
       this.paginator.length = this.users.length;
