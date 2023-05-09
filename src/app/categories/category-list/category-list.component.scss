@@ -1,6 +1,21 @@
-.container{
+.container {
 
-        .icon{
-            cursor: pointer;
-        }
+    .mat-elevation-z8 {
+        max-height: 576px;
+        overflow: auto;
+        width: 98%;
+        margin-left: 1%;
+    }
+
+    .icon-wrapper {
+        text-align: right;
+    }
+
+    .icon {
+        cursor: pointer;
+    }
+
+    .paginator{
+        margin-right: 1%;
+    }
 }

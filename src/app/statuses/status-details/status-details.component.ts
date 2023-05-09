@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Status } from 'src/app/models/status.model';
+import { Status } from 'src/app/models/statuses/status.model';
 
 @Component({
   selector: 'app-status-details',

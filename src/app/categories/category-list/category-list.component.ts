@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,30 +9,26 @@ import { CategoryFilter } from 'src/app/models/categories/category-filter.model'
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./category-list.component.scss']
 })
-export class CategoryListComponent implements OnInit, OnChanges {
+export class CategoryListComponent implements OnChanges {
   @Input() categories: Category[] = [];
-  @Output() deleteEvent = new EventEmitter();
-  @Output() editEvent = new EventEmitter<Category>();
+  @Input() categoriesCount?: number;
 
-  @Output() categoryFilterEvent = new EventEmitter<CategoryFilter>();
+  @Output() onDeleteEvent = new EventEmitter<number>();
+  @Output() onEditEvent = new EventEmitter<Category>();
+  @Output() onPaginate = new EventEmitter<any>();
 
-  categoryFilter: CategoryFilter = {}
+  categoryFilter: CategoryFilter = {};
 
   category: Category = {};
 
   displayedColumns: string[] = ['category', 'actions'];
   dataSource = new MatTableDataSource<Category>();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | any;
+  @ViewChild(MatPaginator, {read : true}) paginator: MatPaginator | any;
 
   constructor(private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-    this.initializeDataSource();
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['categories']) {
@@ -40,25 +36,13 @@ export class CategoryListComponent implements OnInit, OnChanges {
     }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator?.length
-  }
-
-
   initializeDataSource() {
-    if (this.categories && this.paginator) {
-      this.dataSource = new MatTableDataSource<Category>(this.categories);
-      this.dataSource.paginator = this.paginator;
-      this.paginator.length = 3
-
-      this.categoryFilter._page = 1;
-      this.categoryFilter._limit = 3;
-    }
+    this.dataSource = new MatTableDataSource<Category>(this.categories);
+    this.dataSource.paginator = this.paginator;
   }
 
   onDelete(id: number) {
-    this.deleteEvent.emit(id);
+    this.onDeleteEvent.emit(id);
   }
 
   openDialog(category: Category) {
@@ -69,8 +53,14 @@ export class CategoryListComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         category.value = result;
-        this.editEvent.emit(category);
+        this.onEditEvent.emit(category);
       }
     });
   }
+
+  onPaginateChange(data : any){
+    this.onPaginate.emit(data);
+  }
+
 }
+ 

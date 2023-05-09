@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Status } from '../models/status.model';
+import { Status } from '../models/statuses/status.model';
+import { StatusFilter } from '../models/statuses/status-filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,16 @@ export class StatusService {
     return this.http.get<Status[]>('http://localhost:3000/statuses');
   }
 
+  getStatusesWithCount(statusFilter: StatusFilter) {
+    return this.http.get<Status[]>(`http://localhost:3000/statuses?q=${statusFilter.value}&_page=${statusFilter._page}&_limit=${statusFilter._limit}`, { observe: 'response' })
+      .pipe(map(response => {
+        return {
+          data: response?.body,
+          count: +(response?.headers.get('X-Total-Count')!)
+        };
+      }));
+  }
+
   addStatus(status: Status): Observable<Status> {
     return this.http.post('http://localhost:3000/statuses', status);
   }
@@ -31,33 +42,6 @@ export class StatusService {
   updateStatus(value: string, id: number): Observable<Status> {
     const url = 'http://localhost:3000/statuses/' + id;
     return this.http.put<Status>(url, value);
-  }
-
-  filterStatuses(filterValues: any): Observable<Status[]> {
-    return this.getStatuses().pipe(
-      map((statuses: Status[]) => {
-
-        return statuses.filter((status: Status) => {
-          let isMatch = true;
-
-          for (const key in filterValues) {
-            if (filterValues.hasOwnProperty(key) && filterValues[key]) {
-              if (key === "value") {
-                if (!status[key] || !status[key]!.toLowerCase().includes(filterValues[key].toLowerCase())) {
-                  isMatch = false;
-                  break;
-                }
-              } else if(status[key] === undefined && status[key] !== filterValues[key]){
-                  isMatch = false;
-                  break;
-              }
-            }
-
-          }
-          return isMatch;
-        });
-      })
-    );
   }
   
 }

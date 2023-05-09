@@ -10,7 +10,7 @@ export class CategoryFilterComponent implements OnInit {
 
   categoryFilterForm: FormGroup | any;
 
-  @Output() filterEvent = new EventEmitter<any>();
+  @Output() onFilterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.initForm();
@@ -23,11 +23,12 @@ export class CategoryFilterComponent implements OnInit {
   }
 
   onClear() {
-    this.categoryFilterForm.reset();
+    this.categoryFilterForm.reset({
+      value: ''
+    });
   }
 
   onSubmit() {
-    const filterValues = this.categoryFilterForm.value.value;
-    this.filterEvent.emit(filterValues);
+    this.onFilterEvent.emit(this.categoryFilterForm.value.value);
   }
 }

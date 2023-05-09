@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Category } from 'src/app/models/categories/category.model';
-import { Status } from 'src/app/models/status.model';
+import { Status } from 'src/app/models/statuses/status.model';
 
 @Component({
   selector: 'app-user-filter',

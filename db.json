@@ -33,38 +33,86 @@
   ],
   "categories": [
     {
-      "value": "qwe",
-      "id": 1
+      "value": "5",
+      "id": 19
+    },
+    {
+      "value": "1",
+      "id": 20
+    },
+    {
+      "value": "123",
+      "id": 21
+    },
+    {
+      "value": "qw",
+      "id": 22
+    },
+    {
+      "value": "asd",
+      "id": 23
     },
     {
       "value": "zxc",
-      "id": 3
+      "id": 24
     },
     {
-      "value": "sdf",
-      "id": 7
+      "value": "a",
+      "id": 26
     },
     {
-      "value": "sdg",
-      "id": 8
+      "value": "a",
+      "id": 27
+    },
+    {
+      "value": "asd12",
+      "id": 30
     },
     {
       "value": "asd",
-      "id": 11
+      "id": 31
+    },
+    {
+      "value": "12345",
+      "id": 32
     },
     {
       "value": "asd",
-      "id": 12
+      "id": 33
+    },
+    {
+      "value": "123",
+      "id": 34
+    },
+    {
+      "value": "asdqwe",
+      "id": 35
     }
   ],
   "statuses": [
     {
       "id": 1,
-      "value": "online"
+      "value": "onlineee"
     },
     {
       "id": 2,
       "value": "offline"
+    },
+    {
+      "value": "asd",
+      "id": 14
+    },
+    {
+      "value": "qwe",
+      "id": 15
+    },
+    {
+      "value": "zxc",
+      "id": 16
+    },
+    {
+      "value": "qwe",
+      "id": 17
     }
   ]
 }

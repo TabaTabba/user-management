@@ -5,7 +5,7 @@ import { UserService } from '../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../models/categories/category.model';
 import { CategoryService } from '../services/category.service';
-import { Status } from '../models/status.model';
+import { Status } from '../models/statuses/status.model';
 import { StatusService } from '../services/status.service';
 import { CategoryFilter } from '../models/categories/category-filter.model';
 

@@ -11,12 +11,16 @@ import { CategoryFilter } from '../models/categories/category-filter.model';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  categoryCount?: number;
+  categoriesCount?: number;
   categories: Category[] = [];
 
   category: Category = {};
 
-  categoryFilter : CategoryFilter = {}
+  categoryFilter : CategoryFilter = {
+    _page : 0,
+    _limit : 10,
+    value : ""
+  }
 
   constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
 
@@ -26,14 +30,12 @@ export class CategoriesComponent implements OnInit {
 
   getCategories(categoryFilter: CategoryFilter) {
     this.categoryService.getCategoriesWithCount(categoryFilter).subscribe((categories) => {
-      this.categories = categories.data || []
-      this.categoryCount = categories.count
-      console.log(this.categoryCount)
+      this.categories = categories.data || [];
+      this.categoriesCount = categories.count;
     });
   }
 
-  deleteCategory(event: any) {
-    const id = event as number;
+  deleteCategory(id: number) {
     this.categoryService.deleteCategory(id).subscribe(() => {
       this.getCategories(this.categoryFilter);
     });
@@ -69,9 +71,14 @@ export class CategoriesComponent implements OnInit {
   }
 
   filterCategories(value: string){
+    this.categoryFilter._page = 0;
     this.categoryFilter.value = value;
-    this.categoryFilter._page = 1;
-    this.categoryFilter._limit = 1;
     this.getCategories(this.categoryFilter);
+  }
+
+  paginate(paginatorData : any){
+    this.categoryFilter._page = paginatorData.pageIndex + 1;
+    this.categoryFilter._limit = paginatorData.pageSize;
+    this.getCategories(this.categoryFilter)
   }
 }

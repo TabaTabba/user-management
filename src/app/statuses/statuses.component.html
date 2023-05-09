@@ -1,7 +1,7 @@
-<app-status-filter (filterEvent)="filterStatuses($event)"></app-status-filter>
+<app-status-filter (onFilterEvent)="filterStatuses($event)"></app-status-filter>
 <div class="btn-wrapper">
     <mat-dialog-actions>
         <button class="btn" mat-flat-button color="primary" (click)="openDialog()">Add Status</button>
     </mat-dialog-actions>
 </div>
-<app-status-list [statuses]="statuses" (deleteEvent)="deleteStatus($event)" (editEvent)="editStatus($event)"></app-status-list>
+<app-status-list [statuses]="statuses" [statusesCount]="statusesCount" (onDeleteEvent)="deleteStatus($event)" (onEditEvent)="editStatus($event)" (onPaginate)="paginate($event)" ></app-status-list>

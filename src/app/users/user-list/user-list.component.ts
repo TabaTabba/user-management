@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../models/user.model';
@@ -7,12 +7,11 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit, OnChanges {
+export class UserListComponent implements OnChanges{
   @Input() users?: User[];
-  @Output() deleteEvent = new EventEmitter();
+  @Output() onDeleteEvent = new EventEmitter();
   displayedColumns: string[] = ['email', 'personalId', 'firstName', 'lastName', 'dateOfBirth', 'category', 'status', 'actions'];
   dataSource = new MatTableDataSource<User>();
 
@@ -20,11 +19,9 @@ export class UserListComponent implements OnInit, OnChanges {
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    this.initializeDataSource();
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
     if (changes['users']) {
       this.initializeDataSource();
     }
@@ -35,11 +32,9 @@ export class UserListComponent implements OnInit, OnChanges {
   }
 
   initializeDataSource() {
-    if (this.users && this.paginator) {
+    console.log(this.users, this.paginator);
       this.dataSource = new MatTableDataSource<User>(this.users);
       this.dataSource.paginator = this.paginator;
-      this.paginator.length = this.users.length;
-    }
   }
 
   onEdit(id: number) {
@@ -47,6 +42,6 @@ export class UserListComponent implements OnInit, OnChanges {
   }
 
   onDelete(id: number) {
-    this.deleteEvent.emit(id);
+    this.onDeleteEvent.emit(id);
   }
 }

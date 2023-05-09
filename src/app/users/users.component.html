@@ -1,4 +1,4 @@
 <div>
     <app-user-filter [categories]="categories" [statuses]="statuses" (filterEvent)="filterUsers($event)"></app-user-filter>
-    <app-user-list [users]="filteredUsers" (deleteEvent)="deleteUser($event)"></app-user-list>
+    <app-user-list [users]="filteredUsers" (onDeleteEvent)="deleteUser($event)"></app-user-list>
 </div>

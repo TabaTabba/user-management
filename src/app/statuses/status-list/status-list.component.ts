@@ -1,32 +1,34 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Status } from 'src/app/models/status.model';
+import { Status } from 'src/app/models/statuses/status.model';
 import { StatusDetailsComponent } from '../status-details/status-details.component';
+import { StatusFilter } from 'src/app/models/statuses/status-filter.model';
 
 @Component({
   selector: 'app-status-list',
   templateUrl: './status-list.component.html',
   styleUrls: ['./status-list.component.scss']
 })
-export class StatusListComponent {
+export class StatusListComponent implements OnChanges{
   @Input() statuses?: Status[];
-  @Output() deleteEvent = new EventEmitter();
-  @Output() editEvent = new EventEmitter<Status>();
+  @Input() statusesCount?: number;
+
+  @Output() onDeleteEvent = new EventEmitter<number>();
+  @Output() onEditEvent = new EventEmitter<Status>();
+  @Output() onPaginate = new EventEmitter<any>();
+
+  statusFilter: StatusFilter = {};
 
   status: Status = {};
 
   displayedColumns: string[] = ['status', 'actions'];
   dataSource = new MatTableDataSource<Status>();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | any;
+  @ViewChild(MatPaginator, {read : true}) paginator: MatPaginator | any;
 
   constructor(private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-    this.initializeDataSource();
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['statuses']) {
@@ -34,21 +36,13 @@ export class StatusListComponent {
     }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
-
   initializeDataSource() {
-    if (this.statuses && this.paginator) {
       this.dataSource = new MatTableDataSource<Status>(this.statuses);
       this.dataSource.paginator = this.paginator;
-      this.paginator.length = this.statuses.length;
-    }
   }
 
   onDelete(id: number) {
-    this.deleteEvent.emit(id);
+    this.onDeleteEvent.emit(id);
   }
 
   openDialog(status: Status) {
@@ -59,8 +53,12 @@ export class StatusListComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         status.value = result;
-        this.editEvent.emit(status); 
+        this.onEditEvent.emit(status); 
       }
     });
+  }
+
+  onPaginateChange(data : any){
+    this.onPaginate.emit(data);
   }
 }

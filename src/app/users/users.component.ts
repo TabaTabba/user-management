@@ -4,7 +4,7 @@ import { User } from '../models/user.model';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/categories/category.model';
 import { StatusService } from '../services/status.service';
-import { Status } from '../models/status.model';
+import { Status } from '../models/statuses/status.model';
 
 @Component({
   selector: 'app-users',
@@ -26,7 +26,9 @@ export class UsersComponent implements OnInit {
 
   getUsers() {
     this.userService.getUsers().subscribe((users) => {
+      console.log(users);
       this.filteredUsers = users.reverse();
+      console.log(this.filteredUsers);
     })
   }
 

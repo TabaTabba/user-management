@@ -10,7 +10,7 @@ export class StatusFilterComponent {
 
   statusFilterForm: FormGroup | any;
   
-  @Output() filterEvent = new EventEmitter<any>();
+  @Output() onFilterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.initForm();
@@ -23,11 +23,12 @@ export class StatusFilterComponent {
   }
 
   onClear() {
-    this.statusFilterForm.reset();
+    this.statusFilterForm.reset({
+      value: ''
+    });
   }
 
   onSubmit(){
-    const filterValues = this.statusFilterForm.value;
-    this.filterEvent.emit(filterValues);
+    this.onFilterEvent.emit(this.statusFilterForm.value.value);
   }
 }
