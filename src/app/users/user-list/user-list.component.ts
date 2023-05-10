@@ -1,40 +1,41 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { User } from '../../models/user.model';
+import { User } from '../../models/users/user.model';
 import { Router } from '@angular/router';
+import { UserFilter } from 'src/app/models/users/user-filter.model';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnChanges{
+export class UserListComponent implements OnChanges {
   @Input() users?: User[];
+  @Input() usersCount?: number;
+
   @Output() onDeleteEvent = new EventEmitter();
+  @Output() onPaginate = new EventEmitter<any>();
+
+  userFilter: UserFilter = {};
+
   displayedColumns: string[] = ['email', 'personalId', 'firstName', 'lastName', 'dateOfBirth', 'category', 'status', 'actions'];
   dataSource = new MatTableDataSource<User>();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | any;
+  @ViewChild(MatPaginator, { read: true }) paginator: MatPaginator | any;
 
   constructor(private router: Router) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
     if (changes['users']) {
       this.initializeDataSource();
     }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
   initializeDataSource() {
-    console.log(this.users, this.paginator);
-      this.dataSource = new MatTableDataSource<User>(this.users);
-      this.dataSource.paginator = this.paginator;
+    this.dataSource = new MatTableDataSource<User>(this.users);
+    this.dataSource.paginator = this.paginator;
   }
 
   onEdit(id: number) {
@@ -43,5 +44,9 @@ export class UserListComponent implements OnChanges{
 
   onDelete(id: number) {
     this.onDeleteEvent.emit(id);
+  }
+
+  onPaginateChange(data: any) {
+    this.onPaginate.emit(data);
   }
 }

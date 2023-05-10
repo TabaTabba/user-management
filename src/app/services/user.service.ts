@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
+import { User } from '../models/users/user.model';
 import { Observable, map } from 'rxjs';
+import { UserFilter } from '../models/users/user-filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,36 +20,48 @@ export class UserService {
     return this.http.get<User[]>('http://localhost:3000/users');
   }
 
-  filterUsers(filterValues: any): Observable<User[]> {
-    return this.getUsers().pipe(
-      map((users: User[]) => {
-        return users.filter((user: User) => {
-          let isMatch = true;
+  getUsersWithCount(userFilter: UserFilter) {
+    let queryString = `http://localhost:3000/users`;
 
-          for (const key in filterValues) {
-            if (filterValues.hasOwnProperty(key) && filterValues[key]) {
-              if (key === 'email' || key === 'firstName' || key === 'lastName') {
-                if (!user[key]!.toLowerCase().includes(filterValues[key].toLowerCase())) {
-                  isMatch = false;
-                  break;
-                }
-              } else {
-                if (user[key] !== filterValues[key]) {
-                  isMatch = false;
-                  break;
-                }
-              }
-            }
-          }
+    let params = new HttpParams();
 
-          return isMatch;
-        });
-      })
-    );
+    if (userFilter.email) {
+      params = params.append('email_like', userFilter.email);
+    }
+
+    if (userFilter.personalId) {
+      params = params.append('personalId', userFilter.personalId);
+    }
+
+    if (userFilter.firstName) {
+      params = params.append('firstName_like', userFilter.firstName);
+    }
+
+    if (userFilter.lastName) {
+      params = params.append('lastName_like', userFilter.lastName);
+    }
+
+    if (userFilter.dateOfBirth) {
+      params = params.append('dateOfBirth', userFilter.dateOfBirth);
+    }
+
+    if (userFilter.category) {
+      params = params.append('category', userFilter.category);
+    }
+
+    if (userFilter.status) {
+      params = params.append('status', userFilter.status);
+    }
+
+    return this.http.get<User[]>(queryString, { params, observe: 'response' })
+      .pipe(map(response => {
+        console.log(+(response?.headers.get('X-Total-Count')!));
+        return {
+          data: response?.body,
+          count: +(response?.headers.get('X-Total-Count')!)
+        };
+      }));
   }
-
-
-
 
   addUser(user: User): Observable<User> {
     return this.http.post('http://localhost:3000/users', user);

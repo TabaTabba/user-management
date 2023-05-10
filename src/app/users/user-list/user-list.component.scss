@@ -1,18 +1,34 @@
-.container{
+.container {
 
-    .btn-wrapper{
-        margin: 10px;
-        
-        .btn{
-            background-color:rgba(133, 132, 173, 0.74);
+    .btn-wrapper {
+        margin-left: 1%;
+        margin-bottom: 10px;
+
+        .btn {
+            background-color: rgba(133, 132, 173, 0.74);
         }
     }
 
-    .mat-elevation-z8{
+    .mat-elevation-z8 {
+        max-height: 576px;
+        overflow: auto;
+        width: 98%;
+        margin-left: 1%;
 
-        .icon{
-            cursor: pointer;
+        .icons{
+            width: 90px
+        }
+
+        .icon-wrapper {
+            text-align: right;
+
+            .icon {
+                cursor: pointer;
+            }
         }
     }
 
+    .paginator {
+        margin-right: 1%;
+    }
 }

@@ -21,8 +21,6 @@ export class CategoryListComponent implements OnChanges {
 
   categoryFilter: CategoryFilter = {};
 
-  category: Category = {};
-
   displayedColumns: string[] = ['category', 'actions'];
   dataSource = new MatTableDataSource<Category>();
 
@@ -42,6 +40,7 @@ export class CategoryListComponent implements OnChanges {
   }
 
   onDelete(id: number) {
+    this.confirmDialog();
     this.onDeleteEvent.emit(id);
   }
 
@@ -58,9 +57,11 @@ export class CategoryListComponent implements OnChanges {
     });
   }
 
+  confirmDialog(){
+  }
+
   onPaginateChange(data : any){
     this.onPaginate.emit(data);
   }
-
 }
  

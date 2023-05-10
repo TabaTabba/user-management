@@ -21,7 +21,7 @@ export class StatusService {
   }
 
   getStatusesWithCount(statusFilter: StatusFilter) {
-    return this.http.get<Status[]>(`http://localhost:3000/statuses?q=${statusFilter.value}&_page=${statusFilter._page}&_limit=${statusFilter._limit}`, { observe: 'response' })
+    return this.http.get<Status[]>(`http://localhost:3000/statuses?value_like=${statusFilter.value}&_page=${statusFilter._page}&_limit=${statusFilter._limit}`, { observe: 'response' })
       .pipe(map(response => {
         return {
           data: response?.body,

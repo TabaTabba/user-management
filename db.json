@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "email": "s.sabashvili12345@gmail.com",
+      "email": "s.sabashvili12345@gmail.co",
       "personalId": "09421090942",
       "firstName": "Saba",
       "lastName": "saba",
@@ -12,16 +12,6 @@
     },
     {
       "email": "s.sabashvili12345@gmail.com",
-      "personalId": "24241241241",
-      "firstName": "Saba",
-      "lastName": "Sabashvili",
-      "dateOfBirth": "sasad",
-      "category": "category",
-      "status": "offline",
-      "id": 4
-    },
-    {
-      "email": "s.sabashvili12345@gmail.com",
       "personalId": "12342112124",
       "firstName": "sadads",
       "lastName": "asddas",
@@ -29,6 +19,26 @@
       "category": "category",
       "status": "online",
       "id": 5
+    },
+    {
+      "email": "asddsa@dads",
+      "personalId": "21421424124",
+      "firstName": "sads",
+      "lastName": "saddsa",
+      "dateOfBirth": "sdasa",
+      "category": "5",
+      "status": "zxc",
+      "id": 13
+    },
+    {
+      "email": "saads@daads",
+      "personalId": "21124241124",
+      "firstName": "dsadas",
+      "lastName": "asddas",
+      "dateOfBirth": "adsads",
+      "category": "1",
+      "status": "zxc",
+      "id": 14
     }
   ],
   "categories": [

@@ -14,7 +14,7 @@ export class UserFilterComponent implements OnInit {
   @Input() categories?: Category[];
   @Input() statuses?: Status[];
   
-  @Output() filterEvent = new EventEmitter<any>();
+  @Output() onFilterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.initForm();
@@ -41,11 +41,18 @@ export class UserFilterComponent implements OnInit {
   }
 
   onClear() {
-    this.userFilterForm.reset();
+    this.userFilterForm.reset({
+      email: '',
+      personalId: '',
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      category: '',
+      status: ''
+    });
   }
 
   onSubmit() {
-    const filterValues = this.userFilterForm.value;
-    this.filterEvent.emit(filterValues);
+    this.onFilterEvent.emit(this.userFilterForm.value);
   }
 }

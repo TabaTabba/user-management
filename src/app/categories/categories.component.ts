@@ -14,8 +14,6 @@ export class CategoriesComponent implements OnInit {
   categoriesCount?: number;
   categories: Category[] = [];
 
-  category: Category = {};
-
   categoryFilter : CategoryFilter = {
     _page : 0,
     _limit : 10,

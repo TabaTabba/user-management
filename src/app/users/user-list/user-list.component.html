@@ -39,17 +39,19 @@
         <th mat-header-cell *matHeaderCellDef> Status </th>
         <td mat-cell *matCellDef="let user"> {{user.status}} </td>
       </ng-container>
-      
+
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>  </th>
-        <td mat-cell *matCellDef="let user"><mat-icon class="icon" (click)="onDelete(user.id)">delete</mat-icon>&nbsp;&nbsp;<mat-icon class="icon" (click)="onEdit(user.id)">edit</mat-icon></td>
+        <th mat-header-cell *matHeaderCellDef class="icons"> </th>
+        <td mat-cell *matCellDef="let user" class="icon-wrapper"><mat-icon class="icon"
+            (click)="onDelete(user.id)">delete</mat-icon>&nbsp;&nbsp;<mat-icon class="icon"
+            (click)="onEdit(user.id)">edit</mat-icon></td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of users">
-    </mat-paginator>
   </div>
+  <mat-paginator [pageSizeOptions]="[10, 20, 50]" [length]="usersCount" (page)="onPaginateChange($event)"
+    [pageSize]="10" showFirstLastButtons aria-label="Select page of users" class="paginator">
+  </mat-paginator>
 </div>

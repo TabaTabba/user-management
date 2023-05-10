@@ -7,7 +7,6 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./category-filter.component.scss']
 })
 export class CategoryFilterComponent implements OnInit {
-
   categoryFilterForm: FormGroup | any;
 
   @Output() onFilterEvent = new EventEmitter<any>();

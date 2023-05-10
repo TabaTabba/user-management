@@ -22,7 +22,7 @@ export class CategoryService {
   }
 
   getCategoriesWithCount(categoryFilter: CategoryFilter) {
-    return this.http.get<Category[]>(`http://localhost:3000/categories?q=${categoryFilter.value}&_page=${categoryFilter._page}&_limit=${categoryFilter._limit}`, { observe: 'response' })
+    return this.http.get<Category[]>(`http://localhost:3000/categories?value_like=${categoryFilter.value}&_page=${categoryFilter._page}&_limit=${categoryFilter._limit}`, { observe: 'response' })
       .pipe(map(response => {
         return {
           data: response?.body,
