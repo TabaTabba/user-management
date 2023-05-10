@@ -2,14 +2,16 @@
     <form [formGroup]="statusFilterForm" (ngSubmit)="onSubmit()">
         <div class="form-wrapper">
             <div class="input">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-form-field">
                     <mat-label>Status</mat-label>
-                    <input matInput formControlName="value">
-                </mat-form-field>
+                    <input matInput type="text" formControlName="value">
+                    <button *ngIf="statusFilterForm.value.value" matSuffix mat-icon-button aria-label="Clear" (click)="onClear()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
             </div>
             <div class="btn-wrapper">
                 <button mat-flat-button color="primary" class="btn search" type="submit">Search</button>
-                <button mat-flat-button color="warn" class="btn clear" (click)="onClear()">Clear</button>
             </div>
         </div>
     </form>

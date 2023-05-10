@@ -26,6 +26,7 @@ export class StatusFilterComponent {
     this.statusFilterForm.reset({
       value: ''
     });
+    this.onSubmit();
   }
 
   onSubmit(){

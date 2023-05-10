@@ -25,6 +25,7 @@ export class CategoryFilterComponent implements OnInit {
     this.categoryFilterForm.reset({
       value: ''
     });
+    this.onSubmit();
   }
 
   onSubmit() {

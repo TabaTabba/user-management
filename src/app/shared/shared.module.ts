@@ -10,6 +10,7 @@ import { AppRoutingModule } from "../app-routing.module";
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
    HttpClientModule,
    MatIconModule,
    MatDialogModule,
-   FormsModule
+   FormsModule,
+   MatDatepickerModule
  ]
 })
 export class SharedModule{} 
