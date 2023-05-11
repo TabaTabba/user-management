@@ -8,7 +8,7 @@
 
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let status"><mat-icon class="icon"
+                <td mat-cell *matCellDef="let status"  class="icon-wrapper"><mat-icon class="icon"
                         (click)="onDelete(status.id)">delete</mat-icon>&nbsp;&nbsp;<mat-icon class="icon"
                         (click)="openDialog(status)">edit</mat-icon></td>
             </ng-container>
@@ -18,6 +18,6 @@
         </table>
     </div>
     <mat-paginator [pageSizeOptions]="[10, 20, 50]" [length]="statusesCount" (page)="onPaginateChange($event)"
-    [pageSize]="10" showFirstLastButtons aria-label="Select page of statuses" class="paginator">
+        [pageSize]="10" showFirstLastButtons aria-label="Select page of statuses" class="paginator">
     </mat-paginator>
 </div>

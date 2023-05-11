@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Category } from 'src/app/models/categories/category.model';
 import { CategoryDetailsComponent } from '../category-details/category-details.component';
 import { CategoryFilter } from 'src/app/models/categories/category-filter.model';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog.component';
 
 @Component({
   selector: 'app-category-list',
@@ -13,7 +14,7 @@ import { CategoryFilter } from 'src/app/models/categories/category-filter.model'
 })
 export class CategoryListComponent implements OnChanges {
   @Input() categories: Category[] = [];
-  @Input() categoriesCount?: number;
+  @Input() categoriesCount: number = 0
 
   @Output() onDeleteEvent = new EventEmitter<number>();
   @Output() onEditEvent = new EventEmitter<Category>();
@@ -24,24 +25,35 @@ export class CategoryListComponent implements OnChanges {
   displayedColumns: string[] = ['category', 'actions'];
   dataSource = new MatTableDataSource<Category>();
 
-  @ViewChild(MatPaginator, {read : true}) paginator: MatPaginator | any;
+  @ViewChild(MatPaginator, { read: true }) paginator: MatPaginator | any;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    debugger
     if (changes['categories']) {
       this.initializeDataSource();
     }
+    this.changeDetectorRefs.detectChanges();
   }
 
   initializeDataSource() {
+    debugger
     this.dataSource = new MatTableDataSource<Category>(this.categories);
     this.dataSource.paginator = this.paginator;
+
   }
 
   onDelete(id: number) {
-    this.confirmDialog();
-    this.onDeleteEvent.emit(id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.onDeleteEvent.emit(id);
+      }
+    });
   }
 
   openDialog(category: Category) {
@@ -57,11 +69,7 @@ export class CategoryListComponent implements OnChanges {
     });
   }
 
-  confirmDialog(){
-  }
-
-  onPaginateChange(data : any){
+  onPaginateChange(data: any) {
     this.onPaginate.emit(data);
   }
 }
- 

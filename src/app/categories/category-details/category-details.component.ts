@@ -7,7 +7,7 @@ import { Category } from 'src/app/models/categories/category.model';
   templateUrl: './category-details.component.html',
   styleUrls: ['./category-details.component.scss']
 })
-export class CategoryDetailsComponent implements OnInit{
+export class CategoryDetailsComponent implements OnInit {
   category: Category = {};
   @Input() dialogTitle: string = 'Edit category';
 
@@ -17,8 +17,8 @@ export class CategoryDetailsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    if(this.data){
-      this.category = { ...this.data};
+    if (this.data) {
+      this.category = { ...this.data };
     }
   }
 

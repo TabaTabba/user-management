@@ -43,5 +43,5 @@ export class StatusService {
     const url = 'http://localhost:3000/statuses/' + id;
     return this.http.put<Status>(url, value);
   }
-  
+
 }

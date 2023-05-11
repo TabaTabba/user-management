@@ -16,10 +16,10 @@ export class StatusesComponent {
 
   status: Status = {};
 
-  statusFilter : StatusFilter = {
-    _page : 0,
-    _limit : 10,
-    value : ""
+  statusFilter: StatusFilter = {
+    _page: 0,
+    _limit: 10,
+    value: ""
   }
 
   constructor(private statusService: StatusService, private dialog: MatDialog) { }
@@ -76,7 +76,7 @@ export class StatusesComponent {
     this.getStatuses(this.statusFilter);
   }
 
-  paginate(paginatorData : any){
+  paginate(paginatorData: any) {
     this.statusFilter._page = paginatorData.pageIndex + 1;
     this.statusFilter._limit = paginatorData.pageSize;
     this.getStatuses(this.statusFilter)

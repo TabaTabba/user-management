@@ -5,8 +5,8 @@ import { UserDetailsComponent } from './user-details.component';
 
 
 @NgModule({
-  declarations: [ UserDetailsComponent ],
-  imports: [ SharedModule ],
-  exports: [ UserDetailsComponent ]
+  declarations: [UserDetailsComponent],
+  imports: [SharedModule],
+  exports: [UserDetailsComponent]
 })
 export class UserDetailsModule { }

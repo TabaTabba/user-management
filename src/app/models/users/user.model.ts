@@ -7,5 +7,4 @@ export class User{
     dateOfBirth?: Date;
     category?: string;
     status?: string;
-    [key: string]: any;
 }

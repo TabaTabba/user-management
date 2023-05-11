@@ -6,17 +6,18 @@ import { SharedModule } from "../shared/shared.module";
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 
 @NgModule({
- declarations: [
-    CategoriesComponent,
-    CategoryFilterComponent,
-    CategoryListComponent,
-    CategoryDetailsComponent
-],
- imports: [SharedModule],
- exports: [
-    CategoriesComponent,
-    CategoryFilterComponent,
-    CategoryListComponent
-]
+    declarations: [
+        CategoriesComponent,
+        CategoryFilterComponent,
+        CategoryListComponent,
+        CategoryDetailsComponent
+    ],
+    imports: [SharedModule],
+    exports: [
+        CategoriesComponent,
+        CategoryFilterComponent,
+        CategoryListComponent,
+        CategoryDetailsComponent
+    ]
 })
-export class CategoriesModule{}
+export class CategoriesModule { }

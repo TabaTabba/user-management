@@ -9,14 +9,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class StatusFilterComponent {
 
   statusFilterForm: FormGroup | any;
-  
+
   @Output() onFilterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.statusFilterForm = new FormGroup({
       'value': new FormControl('')
     })
@@ -29,7 +29,7 @@ export class StatusFilterComponent {
     this.onSubmit();
   }
 
-  onSubmit(){
+  onSubmit() {
     this.onFilterEvent.emit(this.statusFilterForm.value.value);
   }
 }

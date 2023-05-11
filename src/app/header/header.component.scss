@@ -1,18 +1,21 @@
-.container{
+.container {
     display: flex;
 }
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
     text-decoration: none;
     color: inherit;
 }
 
-ul > li {
+ul>li {
     display: inline-block;
     margin: 20px;
     cursor: pointer;
 }
 
-h3{
+h3 {
     margin: 10px;
 }

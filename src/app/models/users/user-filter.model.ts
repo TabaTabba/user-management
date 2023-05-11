@@ -3,7 +3,6 @@ export class UserFilter {
     personalId?: string;
     firstName?: string;
     lastName?: string;
-    dateOfBirth?: string;
     category?: string;
     status?: string;
     _page?: number;

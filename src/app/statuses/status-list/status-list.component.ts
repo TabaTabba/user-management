@@ -5,13 +5,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Status } from 'src/app/models/statuses/status.model';
 import { StatusDetailsComponent } from '../status-details/status-details.component';
 import { StatusFilter } from 'src/app/models/statuses/status-filter.model';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog.component';
 
 @Component({
   selector: 'app-status-list',
   templateUrl: './status-list.component.html',
   styleUrls: ['./status-list.component.scss']
 })
-export class StatusListComponent implements OnChanges{
+export class StatusListComponent implements OnChanges {
   @Input() statuses?: Status[];
   @Input() statusesCount?: number;
 
@@ -26,7 +27,7 @@ export class StatusListComponent implements OnChanges{
   displayedColumns: string[] = ['status', 'actions'];
   dataSource = new MatTableDataSource<Status>();
 
-  @ViewChild(MatPaginator, {read : true}) paginator: MatPaginator | any;
+  @ViewChild(MatPaginator, { read: true }) paginator: MatPaginator | any;
 
   constructor(private dialog: MatDialog) { }
 
@@ -37,28 +38,36 @@ export class StatusListComponent implements OnChanges{
   }
 
   initializeDataSource() {
-      this.dataSource = new MatTableDataSource<Status>(this.statuses);
-      this.dataSource.paginator = this.paginator;
+    this.dataSource = new MatTableDataSource<Status>(this.statuses);
+    this.dataSource.paginator = this.paginator;
   }
 
   onDelete(id: number) {
-    this.onDeleteEvent.emit(id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.onDeleteEvent.emit(id);
+      }
+    });
   }
 
   openDialog(status: Status) {
     const dialogRef = this.dialog.open(StatusDetailsComponent, {
       data: status
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         status.value = result;
-        this.onEditEvent.emit(status); 
+        this.onEditEvent.emit(status);
       }
     });
   }
 
-  onPaginateChange(data : any){
+  onPaginateChange(data: any) {
     this.onPaginate.emit(data);
   }
 }

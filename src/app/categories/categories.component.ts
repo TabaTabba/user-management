@@ -14,10 +14,10 @@ export class CategoriesComponent implements OnInit {
   categoriesCount?: number;
   categories: Category[] = [];
 
-  categoryFilter : CategoryFilter = {
-    _page : 0,
-    _limit : 10,
-    value : ""
+  categoryFilter: CategoryFilter = {
+    _page: 0,
+    _limit: 10,
+    value: ""
   }
 
   constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
@@ -68,13 +68,13 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  filterCategories(value: string){
+  filterCategories(value: string) {
     this.categoryFilter._page = 0;
     this.categoryFilter.value = value;
     this.getCategories(this.categoryFilter);
   }
 
-  paginate(paginatorData : any){
+  paginate(paginatorData: any) {
     this.categoryFilter._page = paginatorData.pageIndex + 1;
     this.categoryFilter._limit = paginatorData.pageSize;
     this.getCategories(this.categoryFilter)

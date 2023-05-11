@@ -3,12 +3,14 @@ import { UserFilterComponent } from "./user-filter/user-filter.component";
 import { UserListComponent } from "./user-list/user-list.component";
 import { UsersComponent } from "./users.component";
 import { SharedModule } from "../shared/shared.module";
+import { ConfirmDialogComponent } from "../shared/confirm-dialog.component";
 
 @NgModule({
    declarations: [
       UsersComponent,
       UserFilterComponent,
-      UserListComponent
+      UserListComponent,
+      ConfirmDialogComponent
    ],
    imports: [
       SharedModule
@@ -16,7 +18,8 @@ import { SharedModule } from "../shared/shared.module";
    exports: [
       UsersComponent,
       UserFilterComponent,
-      UserListComponent
+      UserListComponent,
+      ConfirmDialogComponent
    ]
 })
 export class UsersModule { }

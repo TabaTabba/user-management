@@ -17,8 +17,8 @@ export class StatusDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.data){
-      this.status = { ...this.data};
+    if (this.data) {
+      this.status = { ...this.data };
     }
   }
 

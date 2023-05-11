@@ -41,10 +41,6 @@ export class UserService {
       params = params.append('lastName_like', userFilter.lastName);
     }
 
-    if (userFilter.dateOfBirth) {
-      params = params.append('dateOfBirth', userFilter.dateOfBirth);
-    }
-
     if (userFilter.category) {
       params = params.append('category', userFilter.category);
     }
@@ -53,9 +49,16 @@ export class UserService {
       params = params.append('status', userFilter.status);
     }
 
+    if (userFilter._page) {
+      params = params.append('_page', userFilter._page);
+    }
+
+    if (userFilter._limit) {
+      params = params.append('_limit', userFilter._limit);
+    }
+
     return this.http.get<User[]>(queryString, { params, observe: 'response' })
       .pipe(map(response => {
-        console.log(+(response?.headers.get('X-Total-Count')!));
         return {
           data: response?.body,
           count: +(response?.headers.get('X-Total-Count')!)

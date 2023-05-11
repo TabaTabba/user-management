@@ -25,7 +25,6 @@ export class UsersComponent implements OnInit {
     personalId: '',
     firstName: '',
     lastName: '',
-    dateOfBirth: '',
     category: '',
     status: ''
   }
@@ -69,13 +68,12 @@ export class UsersComponent implements OnInit {
     this.userFilter.personalId = userFilter.personalId;
     this.userFilter.firstName = userFilter.firstName;
     this.userFilter.lastName = userFilter.lastName;
-    this.userFilter.dateOfBirth = userFilter.dateOfBirth;
     this.userFilter.category = userFilter.category;
     this.userFilter.status = userFilter.status;
     this.getUsers(this.userFilter);
   }
 
-  paginate(paginatorData: any){
+  paginate(paginatorData: any) {
     this.userFilter._page = paginatorData.pageIndex + 1;
     this.userFilter._limit = paginatorData.pageSize;
     this.getUsers(this.userFilter);

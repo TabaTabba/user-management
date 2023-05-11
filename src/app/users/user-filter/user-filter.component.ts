@@ -25,7 +25,6 @@ export class UserFilterComponent implements OnInit {
     let personalId = '';
     let firstName = '';
     let lastName = '';
-    let dateOfBirth = '';
     let category = '';
     let status = '';
 
@@ -34,7 +33,6 @@ export class UserFilterComponent implements OnInit {
       'personalId': new FormControl(personalId),
       'firstName': new FormControl(firstName),
       'lastName': new FormControl(lastName),
-      'dateOfBirth': new FormControl(dateOfBirth),
       'category': new FormControl(category),
       'status': new FormControl(status)
     })
@@ -46,7 +44,6 @@ export class UserFilterComponent implements OnInit {
       personalId: '',
       firstName: '',
       lastName: '',
-      dateOfBirth: '',
       category: '',
       status: ''
     });

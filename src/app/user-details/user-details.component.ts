@@ -22,12 +22,12 @@ export class UserDetailsComponent implements OnInit {
 
   buttonText?: string;
 
-  categoryFitler : CategoryFilter = {};
+  categoryFitler: CategoryFilter = {};
 
   idParam: string | null = this.route.snapshot.paramMap.get('id');
   id: number | null = this.idParam ? +this.idParam : null;
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private statusService: StatusService) {}
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private statusService: StatusService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -59,7 +59,7 @@ export class UserDetailsComponent implements OnInit {
         'category': new FormControl(category, Validators.required),
         'status': new FormControl(status, Validators.required)
       })
-    } else if(this.id) {
+    } else if (this.id) {
       this.userService.getUser(this.id).subscribe((user) => {
         this.userCreateForm = new FormGroup({
           'email': new FormControl(user.email, [Validators.required, Validators.email]),
@@ -91,7 +91,7 @@ export class UserDetailsComponent implements OnInit {
         this.userService.addUser(user).subscribe(() => { });
         this.router.navigate(['/users']);
       }
-    } else if(this.userCreateForm !== undefined){
+    } else if (this.userCreateForm !== undefined) {
       const formValues = this.userCreateForm.value;
       const user: User = {
         email: formValues.email,
@@ -127,13 +127,13 @@ export class UserDetailsComponent implements OnInit {
     }
   }
 
-  getCategories(){
+  getCategories() {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
   }
-  
-  getStatuses(){
+
+  getStatuses() {
     this.statusService.getStatuses().subscribe((statuses) => {
       this.statuses = statuses;
     });

@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { User } from '../../models/users/user.model';
 import { Router } from '@angular/router';
 import { UserFilter } from 'src/app/models/users/user-filter.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog.component';
 
 @Component({
   selector: 'app-user-list',
@@ -24,8 +26,7 @@ export class UserListComponent implements OnChanges {
 
   @ViewChild(MatPaginator, { read: true }) paginator: MatPaginator | any;
 
-  constructor(private router: Router) { }
-
+  constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['users']) {
@@ -43,10 +44,19 @@ export class UserListComponent implements OnChanges {
   }
 
   onDelete(id: number) {
-    this.onDeleteEvent.emit(id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.onDeleteEvent.emit(id);
+      }
+    });
   }
 
   onPaginateChange(data: any) {
     this.onPaginate.emit(data);
   }
 }
+

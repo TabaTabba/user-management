@@ -6,16 +6,16 @@ import { SharedModule } from "../shared/shared.module";
 import { StatusDetailsComponent } from './status-details/status-details.component';
 
 @NgModule({
- declarations: [
-    StatusesComponent,
-    StatusFilterComponent,
-    StatusListComponent,
-    StatusDetailsComponent
- ],
- imports: [SharedModule],
- exports: [
-    StatusesComponent,
-    StatusFilterComponent,
-    StatusListComponent]
+   declarations: [
+      StatusesComponent,
+      StatusFilterComponent,
+      StatusListComponent,
+      StatusDetailsComponent
+   ],
+   imports: [SharedModule],
+   exports: [
+      StatusesComponent,
+      StatusFilterComponent,
+      StatusListComponent]
 })
-export class StatusesModule{}
+export class StatusesModule { }
