@@ -24,11 +24,11 @@
   "statuses": [
     {
       "id": 1,
-      "value": "online"
+      "value": "Online"
     },
     {
       "id": 2,
-      "value": "offline"
+      "value": "Offline"
     }
   ]
 }
