@@ -2,5 +2,5 @@
     <app-user-filter [categories]="categories" [statuses]="statuses"
         (onFilterEvent)="filterUsers($event)"></app-user-filter>
     <app-user-list [users]="users" [usersCount]="usersCount" (onDeleteEvent)="deleteUser($event)"
-        (onPaginate)="paginate($event)"></app-user-list>
+        (onPaginate)="paginate($event)" [pageIndex]="pageIndex"></app-user-list>
 </div>

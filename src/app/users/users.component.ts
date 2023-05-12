@@ -69,6 +69,11 @@ export class UsersComponent implements OnInit {
   }
 
   filterUsers(userFilter: UserFilter) {
+    if (userFilter.email == "" && userFilter.firstName == "" && userFilter.lastName == "" && userFilter.personalId == "" && userFilter.status == "" && userFilter.category == "") {
+      this.pageIndex = undefined;
+    } else {
+      this.pageIndex = 0;
+    }
     this.userFilter._page = 0;
     this.userFilter.email = userFilter.email;
     this.userFilter.personalId = userFilter.personalId;
