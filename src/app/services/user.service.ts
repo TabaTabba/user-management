@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/users/user.model';
 import { Observable, map } from 'rxjs';
 import { UserFilter } from '../models/users/user-filter.model';
+import { environment } from 'src/environmets/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,16 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser(id: number): Observable<User> {
-    const url = 'http://localhost:3000/users/' + id;
+    const url = `${environment.API_BASE_URI}/users/${id}`;
     return this.http.get<User>(url);
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:3000/users');
+    return this.http.get<User[]>(`${environment.API_BASE_URI}/users`);
   }
 
   getUsersWithCount(userFilter: UserFilter) {
-    let queryString = `http://localhost:3000/users`;
+    let queryString = `${environment.API_BASE_URI}/users`;
 
     let params = new HttpParams();
 
@@ -67,16 +68,16 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    return this.http.post('http://localhost:3000/users', user);
+    return this.http.post(`${environment.API_BASE_URI}/users`, user);
   }
 
   deleteUser(id: number): Observable<User> {
-    const url = 'http://localhost:3000/users/' + id;
+    const url = `${environment.API_BASE_URI}/users/${id}`;
     return this.http.delete<User>(url);
   }
 
   updateUser(user: User, id: number | null) {
-    const url = 'http://localhost:3000/users/' + id;
+    const url = `${environment.API_BASE_URI}/users/${id}`;
     return this.http.put<User>(url, user);
   }
 }

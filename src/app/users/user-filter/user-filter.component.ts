@@ -13,7 +13,7 @@ export class UserFilterComponent implements OnInit {
 
   @Input() categories?: Category[];
   @Input() statuses?: Status[];
-  
+
   @Output() onFilterEvent = new EventEmitter<any>();
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ import { UserFilter } from '../models/users/user-filter.model';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  pageIndex?: number;
   usersCount?: number;
   users: User[] = [];
   categories: Category[] = [];
@@ -48,6 +49,11 @@ export class UsersComponent implements OnInit {
     this.userService.deleteUser(id).subscribe(() => {
       this.getUsers(this.userFilter);
     });
+    if (this.users.length == 1) {
+      this.pageIndex = 0;
+      this.userFilter._page = 1;
+      this.getUsers(this.userFilter);
+    }
   }
 
   getCategories() {

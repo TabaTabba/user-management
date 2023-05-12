@@ -5,5 +5,5 @@
     </mat-dialog-actions>
 </div>
 <app-category-list [categories]="categories" [categoriesCount]="categoriesCount"
-    (onDeleteEvent)="deleteCategory($event)" (onEditEvent)="editCategory($event)"
-    (onPaginate)="paginate($event)"></app-category-list>
+    (onDeleteEvent)="deleteCategory($event)" (onEditEvent)="editCategory($event)" (onPaginate)="paginate($event)"
+    [pageIndex]="pageIndex"></app-category-list>

@@ -52,6 +52,6 @@
     </table>
   </div>
   <mat-paginator [pageSizeOptions]="[10, 20, 50]" [length]="usersCount" (page)="onPaginateChange($event)"
-    [pageSize]="10" showFirstLastButtons aria-label="Select page of users" class="paginator">
+    [pageSize]="10" showFirstLastButtons aria-label="Select page of users" class="paginator" [pageIndex]="pageIndex">
   </mat-paginator>
 </div>

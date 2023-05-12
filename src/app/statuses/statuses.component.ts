@@ -11,16 +11,11 @@ import { StatusFilter } from '../models/statuses/status-filter.model';
   styleUrls: ['./statuses.component.scss']
 })
 export class StatusesComponent {
+  pageIndex?: number;
   statusesCount?: number;
   statuses: Status[] = [];
 
-  status: Status = {};
-
-  statusFilter: StatusFilter = {
-    _page: 0,
-    _limit: 10,
-    value: ""
-  }
+  statusFilter: StatusFilter = new StatusFilter();
 
   constructor(private statusService: StatusService, private dialog: MatDialog) { }
 
@@ -39,6 +34,11 @@ export class StatusesComponent {
     this.statusService.deleteStatus(id).subscribe(() => {
       this.getStatuses(this.statusFilter);
     });
+    if (this.statuses.length == 1) {
+      this.pageIndex = 0;
+      this.statusFilter._page = 1;
+      this.getStatuses(this.statusFilter);
+    }
   }
 
   addStatus(status: Status) {
@@ -71,7 +71,12 @@ export class StatusesComponent {
   }
 
   filterStatuses(value: string) {
-    this.statusFilter._page = 0;
+    if (value == "") {
+      this.pageIndex = undefined;
+    } else {
+      this.pageIndex = 0;
+    }
+    this.statusFilter._page = 1;
     this.statusFilter.value = value;
     this.getStatuses(this.statusFilter);
   }

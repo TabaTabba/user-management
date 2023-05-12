@@ -6,7 +6,7 @@
                     <mat-label>Status</mat-label>
                     <input matInput type="text" formControlName="value">
                     <button *ngIf="statusFilterForm.value.value" matSuffix mat-icon-button aria-label="Clear"
-                        (click)="onClear()">
+                        (click)="onClear()" type="button">
                         <mat-icon>close</mat-icon>
                     </button>
                 </mat-form-field>

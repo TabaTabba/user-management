@@ -5,4 +5,4 @@
     </mat-dialog-actions>
 </div>
 <app-status-list [statuses]="statuses" [statusesCount]="statusesCount" (onDeleteEvent)="deleteStatus($event)"
-    (onEditEvent)="editStatus($event)" (onPaginate)="paginate($event)"></app-status-list>
+    (onEditEvent)="editStatus($event)" (onPaginate)="paginate($event)" [pageIndex]="pageIndex"></app-status-list>

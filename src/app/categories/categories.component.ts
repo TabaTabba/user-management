@@ -11,14 +11,11 @@ import { CategoryFilter } from '../models/categories/category-filter.model';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
+  pageIndex?: number;
   categoriesCount?: number;
   categories: Category[] = [];
 
-  categoryFilter: CategoryFilter = {
-    _page: 0,
-    _limit: 10,
-    value: ""
-  }
+  categoryFilter: CategoryFilter = new CategoryFilter();
 
   constructor(private categoryService: CategoryService, private dialog: MatDialog) { }
 
@@ -37,6 +34,11 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.deleteCategory(id).subscribe(() => {
       this.getCategories(this.categoryFilter);
     });
+    if (this.categories.length == 1) {
+      this.pageIndex = 0;
+      this.categoryFilter._page = 1;
+      this.getCategories(this.categoryFilter);
+    }
   }
 
   addCategory(category: Category) {
@@ -69,7 +71,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   filterCategories(value: string) {
-    this.categoryFilter._page = 0;
+    if (value == "") {
+      this.pageIndex = undefined;
+    } else {
+      this.pageIndex = 0;
+    }
+    this.categoryFilter._page = 1;
     this.categoryFilter.value = value;
     this.getCategories(this.categoryFilter);
   }

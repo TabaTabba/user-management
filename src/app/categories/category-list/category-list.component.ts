@@ -13,8 +13,9 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog.component'
   styleUrls: ['./category-list.component.scss']
 })
 export class CategoryListComponent implements OnChanges {
+  @Input() pageIndex?: number;
   @Input() categories: Category[] = [];
-  @Input() categoriesCount: number = 0
+  @Input() categoriesCount?: number;
 
   @Output() onDeleteEvent = new EventEmitter<number>();
   @Output() onEditEvent = new EventEmitter<Category>();
@@ -27,21 +28,17 @@ export class CategoryListComponent implements OnChanges {
 
   @ViewChild(MatPaginator, { read: true }) paginator: MatPaginator | any;
 
-  constructor(private dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    debugger
     if (changes['categories']) {
       this.initializeDataSource();
     }
-    this.changeDetectorRefs.detectChanges();
   }
 
   initializeDataSource() {
-    debugger
     this.dataSource = new MatTableDataSource<Category>(this.categories);
     this.dataSource.paginator = this.paginator;
-
   }
 
   onDelete(id: number) {

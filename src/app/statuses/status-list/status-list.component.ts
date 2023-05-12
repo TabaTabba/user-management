@@ -13,6 +13,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog.component'
   styleUrls: ['./status-list.component.scss']
 })
 export class StatusListComponent implements OnChanges {
+  @Input() pageIndex?: number;;
   @Input() statuses?: Status[];
   @Input() statusesCount?: number;
 

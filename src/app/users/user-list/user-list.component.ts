@@ -13,6 +13,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog.component'
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnChanges {
+  @Input() pageIndex?: number;
   @Input() users?: User[];
   @Input() usersCount?: number;
 
